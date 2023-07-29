@@ -22,3 +22,15 @@
 .promo p {
     background-color: #39bb40;
 }
+
+a {
+    text-decoration: none;
+    color: white;
+    padding: 4px;
+    background: #8f8c8c;
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 100px;
+    text-align: center;
+}
+
