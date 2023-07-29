@@ -11,7 +11,6 @@ export const Profile = () => {
                 <div>From Moscow</div>
             </div>
             <MyPosts/>
-
         </div>
     );
 };
