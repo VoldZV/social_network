@@ -13,6 +13,18 @@
     background: no-repeat center/100% url("https://proza.ru/pics/2022/12/24/1489.jpg");
 }
 
-.description {
+.profile img {
+    max-height: 200px;
+}
 
+.profileInfo {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }

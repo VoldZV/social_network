@@ -15,10 +15,6 @@
     }
 }
 
-.navbar img {
-    width: 80%
-}
-
 .activeLink {
     color: #00ff0d;
     background-color: green;

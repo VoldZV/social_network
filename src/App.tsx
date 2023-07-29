@@ -14,11 +14,13 @@ function App() {
             <Header/>
             <div className={'underHeader'}>
                 <Navbar/>
-                <Routes>
-                    <Route path={'/profile'} element={<Profile/>}></Route>
-                    <Route path={'/messages'} element={<Dialogs/>}></Route>
-                </Routes>
-                <div className={'promo'}>
+                <div className={'content'}>
+                    <Routes>
+                        <Route path={'/profile'} element={<Profile/>}></Route>
+                        <Route path={'/messages/*'} element={<Dialogs/>}></Route>
+                    </Routes>
+                </div>
+                <div className={'aside'}>
                     <p>Games</p>
                     <p>Features</p>
                     <p>Group</p>
