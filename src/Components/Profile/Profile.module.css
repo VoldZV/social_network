@@ -1,5 +1,14 @@
 .profile {
     width: 70%;
     background-color: #36e9ef;
+    min-height: 100vh;
 }
 
+.profileHeaderBG {
+    height: 200px;
+    background: no-repeat center/100% url("https://proza.ru/pics/2022/12/24/1489.jpg");
+}
+
+.description {
+
+}

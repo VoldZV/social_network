@@ -5,8 +5,10 @@ import s from './Header.module.css'
 export const Header = () => {
     return (
         <div className={s.header}>
-            <img src={logo} alt="logo"/>
 
+            <div className={s.headerLogo}><img src={logo} alt="logo"/></div>
+            <div className={s.headerCenter}>Header Center</div>
+            <div className={s.headerLogin}>Header Login</div>
         </div>
     );
 };

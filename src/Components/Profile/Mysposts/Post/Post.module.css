@@ -1,0 +1,13 @@
+.post {
+    width: 240px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.postAva {
+    height: 70px;
+    width: 70px;
+    border-radius: 100%;
+    margin-right: 20px;
+}
