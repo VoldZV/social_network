@@ -3,20 +3,31 @@ import s from './Diaolgs.module.css'
 import {NavLink} from "react-router-dom";
 
 export const Dialogs = () => {
+
+    const dialogsUsers = [
+        {id: 1, name: 'Galina'},
+        {id: 2, name: 'Alexander'},
+        {id: 3, name: 'Nataliya'},
+        {id: 4, name: 'Danil'},
+        {id: 5, name: 'Pavel'},
+        {id: 6, name: 'Ilya'},
+    ]
+    const dialogsItems = dialogsUsers.map((user) => <DialogsItem key={user.id + user.name} name={user.name} id={user.id}/>)
+
+    const messageItems = [
+        {id: 1, message: 'Hello'},
+        {id: 2, message: 'What`up man'},
+        {id: 3, message: 'Yo'}
+    ]
+    const messages = messageItems.map(item => <Message key={item.id} message={item.message}/>)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogsItem name={'Galina'} id={1}/>
-                <DialogsItem name={'Alexander'} id={2}/>
-                <DialogsItem name={'Nataliya'} id={3}/>
-                <DialogsItem name={'Danil'} id={4}/>
-                <DialogsItem name={'Pavel'} id={5}/>
-                <DialogsItem name={'Ilya'} id={5}/>
+                {dialogsItems}
             </div>
             <div className={s.messages}>
-                <Message message={'Hello'}/>
-                <Message message={'What`up man?'}/>
-                <Message message={'Yo?'}/>
+                {messages}
             </div>
         </div>
     );
