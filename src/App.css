@@ -12,11 +12,11 @@
     background-color: #36e9ef;
     /*min-height: calc(100vh - 100px);*/
 
-    flex: 4
+    flex: 1
 }
 
 .content {
-    flex: 4;
+    flex: 7;
 }
 
 @media screen and (max-width: 650px) {
@@ -30,7 +30,7 @@
     flex-direction: column;
     align-items: center;
     /*width: 15%;*/
-    background-color: #0a2154;
+    background: linear-gradient(30deg, #5d7bbe,#0a2154);
     padding: 10px;
     flex: 1
 }
