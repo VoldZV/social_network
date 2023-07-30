@@ -20,11 +20,11 @@ function App() {
                         <Route path={'/messages/*'} element={<Dialogs/>}></Route>
                     </Routes>
                 </div>
-                <div className={'aside'}>
+                <aside className={'aside'}>
                     <p>Games</p>
                     <p>Features</p>
                     <p>Group</p>
-                </div>
+                </aside>
             </div>
         </div>
     );
