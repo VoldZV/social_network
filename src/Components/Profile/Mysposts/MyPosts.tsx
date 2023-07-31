@@ -1,12 +1,18 @@
 import React from 'react';
 import {Post} from "./Post/Post";
 
-export const MyPosts = () => {
-    const postsData = [
-        {id: 1, message: 'First post message', likesCount: 7},
-        {id: 2, message: 'Second post message', likesCount: 1},
-        {id: 3, message: 'Third post message', likesCount: 3},
-    ]
+export type MyPostsPT = {
+    postsData: PostType[]
+}
+
+export type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+export const MyPosts: React.FC<MyPostsPT> = ({postsData}) => {
+
     const posts = postsData.map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount}/>)
 
     return (

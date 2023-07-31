@@ -1,25 +1,17 @@
 import React from 'react';
 import s from './Diaolgs.module.css'
 import {NavLink} from "react-router-dom";
+import {MessageItemType} from "../../index";
 
-export const Dialogs = () => {
+type DialogsPT = {
+    dialogsUsersData: DialogsItemPT[]
+    messageItemsData: MessageItemType[]
+}
 
-    const dialogsUsers = [
-        {id: 1, name: 'Galina'},
-        {id: 2, name: 'Alexander'},
-        {id: 3, name: 'Nataliya'},
-        {id: 4, name: 'Danil'},
-        {id: 5, name: 'Pavel'},
-        {id: 6, name: 'Ilya'},
-    ]
-    const dialogsItems = dialogsUsers.map((user) => <DialogsItem key={user.id + user.name} name={user.name} id={user.id}/>)
+export const Dialogs: React.FC<DialogsPT> = ({dialogsUsersData,messageItemsData}) => {
 
-    const messageItems = [
-        {id: 1, message: 'Hello'},
-        {id: 2, message: 'What`up man'},
-        {id: 3, message: 'Yo'}
-    ]
-    const messages = messageItems.map(item => <Message key={item.id} message={item.message}/>)
+    const dialogsItems = dialogsUsersData.map((user) => <DialogsItem key={user.id + user.name} name={user.name} id={user.id}/>)
+    const messages = messageItemsData.map(item => <Message key={item.id} message={item.message}/>)
 
     return (
         <div className={s.dialogs}>
@@ -33,7 +25,7 @@ export const Dialogs = () => {
     );
 };
 
-type DialogsItemPT = {
+export type DialogsItemPT = {
     id: number
     name: string
 }

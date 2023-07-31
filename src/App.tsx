@@ -3,11 +3,18 @@ import './App.css';
 import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Profile} from "./Components/Profile/Profile";
-import {Dialogs} from "./Components/Dialogs/Dialogs";
-import {Routes} from 'react-router-dom';
-import {Route} from 'react-router-dom';
+import {Dialogs, DialogsItemPT} from "./Components/Dialogs/Dialogs";
+import {Route, Routes} from 'react-router-dom';
+import {PostType} from "./Components/Profile/Mysposts/MyPosts";
+import {MessageItemType} from "./index";
 
-function App() {
+type AppPT = {
+    postsData: PostType[]
+    dialogsUsersData: DialogsItemPT[]
+    messageItemsData: MessageItemType[]
+}
+
+function App({postsData, messageItemsData, dialogsUsersData}: AppPT) {
 
     return (
         <div className="App">
@@ -16,8 +23,8 @@ function App() {
                 <Navbar/>
                 <div className={'content'}>
                     <Routes>
-                        <Route path={'/profile'} element={<Profile/>}></Route>
-                        <Route path={'/messages/*'} element={<Dialogs/>}></Route>
+                        <Route path={'/profile'} Component={() => <Profile postsData={postsData}/>}></Route>
+                        <Route path={'/messages/*'} Component={() => <Dialogs dialogsUsersData={dialogsUsersData} messageItemsData={messageItemsData}/>}></Route>
                     </Routes>
                 </div>
                 <aside className={'aside'}>
