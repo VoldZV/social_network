@@ -3,18 +3,15 @@ import './App.css';
 import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Profile} from "./Components/Profile/Profile";
-import {Dialogs, DialogsItemPT} from "./Components/Dialogs/Dialogs";
+import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from 'react-router-dom';
-import {PostType} from "./Components/Profile/Mysposts/MyPosts";
-import {MessageItemType} from "./index";
+import {StateType} from "./Components/redux/stateType";
 
 type AppPT = {
-    postsData: PostType[]
-    dialogsUsersData: DialogsItemPT[]
-    messageItemsData: MessageItemType[]
+    state: StateType
 }
 
-function App({postsData, messageItemsData, dialogsUsersData}: AppPT) {
+function App({state}: AppPT) {
 
     return (
         <div className="App">
@@ -23,8 +20,8 @@ function App({postsData, messageItemsData, dialogsUsersData}: AppPT) {
                 <Navbar/>
                 <div className={'content'}>
                     <Routes>
-                        <Route path={'/profile'} Component={() => <Profile postsData={postsData}/>}></Route>
-                        <Route path={'/messages/*'} Component={() => <Dialogs dialogsUsersData={dialogsUsersData} messageItemsData={messageItemsData}/>}></Route>
+                        <Route path={'/profile'} Component={() => <Profile profilePage={state.profilePage}/>}></Route>
+                        <Route path={'/messages/*'} Component={() => <Dialogs dialogsPage={state.dialogsPage}/>}></Route>
                     </Routes>
                 </div>
                 <aside className={'aside'}>

@@ -1,17 +1,18 @@
 import React from 'react';
 import s from './Profile.module.css'
-import {MyPosts, PostType} from "./Mysposts/MyPosts";
+import {MyPosts} from "./Mysposts/MyPosts";
+import {ProfilePageType} from "../redux/stateType";
 
 type ProfilePT = {
-    postsData: PostType[]
+    profilePage: ProfilePageType
 }
 
-export const Profile: React.FC<ProfilePT> = ({postsData}) => {
+export const Profile: React.FC<ProfilePT> = ({profilePage}) => {
     return (
         <div className={s.profile}>
             <div className={s.profileHeaderBG}></div>
             <ProfileInfo name={'Vladimir Zvyagin'} town={'Moscow'} avatar={"https://img.icons8.com/?size=512&id=65220&format=png"}/>
-            <MyPosts postsData={postsData}/>
+            <MyPosts postsData={profilePage.postsData}/>
         </div>
     );
 };

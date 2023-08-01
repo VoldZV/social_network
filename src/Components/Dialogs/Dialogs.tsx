@@ -1,14 +1,13 @@
 import React from 'react';
 import s from './Diaolgs.module.css'
 import {NavLink} from "react-router-dom";
-import {MessageItemType} from "../../index";
+import {DialogsPageType} from "../redux/stateType";
 
 type DialogsPT = {
-    dialogsUsersData: DialogsItemPT[]
-    messageItemsData: MessageItemType[]
+    dialogsPage: DialogsPageType
 }
 
-export const Dialogs: React.FC<DialogsPT> = ({dialogsUsersData,messageItemsData}) => {
+export const Dialogs: React.FC<DialogsPT> = ({dialogsPage:{dialogsUsersData, messageItemsData}}) => {
 
     const dialogsItems = dialogsUsersData.map((user) => <DialogsItem key={user.id + user.name} name={user.name} id={user.id}/>)
     const messages = messageItemsData.map(item => <Message key={item.id} message={item.message}/>)

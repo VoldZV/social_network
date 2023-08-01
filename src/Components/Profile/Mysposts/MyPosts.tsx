@@ -1,14 +1,9 @@
 import React from 'react';
 import {Post} from "./Post/Post";
+import {PostType} from "../../redux/stateType";
 
 export type MyPostsPT = {
     postsData: PostType[]
-}
-
-export type PostType = {
-    id: number
-    message: string
-    likesCount: number
 }
 
 export const MyPosts: React.FC<MyPostsPT> = ({postsData}) => {
