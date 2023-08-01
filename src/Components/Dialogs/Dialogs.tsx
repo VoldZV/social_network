@@ -20,6 +20,11 @@ export const Dialogs: React.FC<DialogsPT> = ({dialogsPage:{dialogsUsersData, mes
             <div className={s.messages}>
                 {messages}
             </div>
+            <div className={s.createMessage}>
+                <span>Введите текст</span>
+                <textarea name="" id="" cols={20} rows={3}></textarea>
+                <button>Отправить</button>
+            </div>
         </div>
     );
 };

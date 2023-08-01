@@ -2,8 +2,8 @@
     flex: 4;
     padding: 10px;
     display: flex;
-    width: 50%;
-    justify-content: space-evenly;
+    width: 100%;
+    gap: 40px
 }
 
 .dialogsItem {
@@ -29,4 +29,11 @@
     height: 30px;
     background: #a7b7b4;
     margin-top: 10px;
+}
+
+.createMessage {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px
 }
