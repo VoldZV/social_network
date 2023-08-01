@@ -2,7 +2,7 @@
 export type StateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType
-    navbarPage: {}
+    navbarPage: NavbarPageType
 }
 
 // Dialogs Page type
@@ -32,3 +32,15 @@ export type PostType = {
     message: string
     likesCount: number
 }
+
+// Navbar Page Type
+
+export type NavbarPageType = {
+    friends: FriendsType[]
+}
+
+export type FriendsType = {
+    id: number
+    name: string
+}
+

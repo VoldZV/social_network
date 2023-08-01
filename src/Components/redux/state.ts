@@ -24,5 +24,14 @@ export const state: StateType = {
             {id: 3, message: 'Yo'}
         ]
     },
-    navbarPage: {}
+    navbarPage: {
+        friends: [
+            {id: 1, name: 'Galina'},
+            {id: 2, name: 'Alexander'},
+            {id: 3, name: 'Nataliya'},
+            {id: 4, name: 'Danil'},
+            {id: 5, name: 'Pavel'},
+            {id: 6, name: 'Ilya'},
+        ]
+    }
 }

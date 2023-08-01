@@ -11,17 +11,17 @@ type AppPT = {
     state: StateType
 }
 
-function App({state}: AppPT) {
+function App({state:{profilePage, dialogsPage, navbarPage}}: AppPT) {
 
     return (
         <div className="App">
             <Header/>
             <div className={'underHeader'}>
-                <Navbar/>
+                <Navbar navbarPage={navbarPage}/>
                 <div className={'content'}>
                     <Routes>
-                        <Route path={'/profile'} Component={() => <Profile profilePage={state.profilePage}/>}></Route>
-                        <Route path={'/messages/*'} Component={() => <Dialogs dialogsPage={state.dialogsPage}/>}></Route>
+                        <Route path={'/profile'} Component={() => <Profile profilePage={profilePage}/>}></Route>
+                        <Route path={'/messages/*'} Component={() => <Dialogs dialogsPage={dialogsPage}/>}></Route>
                     </Routes>
                 </div>
                 <aside className={'aside'}>

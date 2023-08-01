@@ -1,0 +1,22 @@
+.friendContainer {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    gap: 15px;
+}
+
+.friend {
+    display: flex;
+    flex-direction: column;
+    color: #00ff0d;
+    font-size: 10px;
+    max-width: 40px;
+    align-items: center;
+}
+
+.friend img {
+    width: 40px;
+    border-radius: 100%;
+}
