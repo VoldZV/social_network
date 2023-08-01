@@ -26,7 +26,7 @@ type ProfileInfoPT = {
 const ProfileInfo: React.FC<ProfileInfoPT> = ({name, town,avatar}) => {
     return (
         <div className={s.profileInfo}>
-            <img src={avatar} alt=""/>
+            <img src={avatar} alt="ava"/>
             <div className={s.description}>
                 <div>{name}</div>
                 <div>{town}</div>

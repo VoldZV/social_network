@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {RefObject} from 'react';
 import {Post} from "./Post/Post";
 import {PostType} from "../../redux/stateType";
 
@@ -10,12 +10,18 @@ export const MyPosts: React.FC<MyPostsPT> = ({postsData}) => {
 
     const posts = postsData.map(post => <Post key={post.id} message={post.message} likesCount={post.likesCount}/>)
 
+    const textareaRef: RefObject<HTMLTextAreaElement> = React.createRef()
+
+    const onClickHandler = () => {
+        alert(textareaRef.current?.value)
+    }
+
     return (
         <>
             <div>
                 Add your Post
-                <textarea name="addPost" id="area" cols={50} rows={5}></textarea>
-                <button>Add Post</button>
+                <textarea ref={textareaRef} name="addPost" id="area" cols={30} rows={3}></textarea>
+                <button onClick={onClickHandler}>Add Post</button>
             </div>
             {posts}
         </>

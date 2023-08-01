@@ -11,8 +11,6 @@ type NavbarPropsType = {
 
 export const Navbar: React.FC<NavbarPropsType> = ({navbarPage}) => {
 
-
-    
     return (
         <>
             <nav className={s.navbar}>
