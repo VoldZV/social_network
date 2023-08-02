@@ -5,14 +5,20 @@ import {ProfilePageType} from "../redux/stateType";
 
 type ProfilePT = {
     profilePage: ProfilePageType
+    addPost: (postValue: string) => void
+    changeTextariaValue: (newPostValue: string) => void
 }
 
-export const Profile: React.FC<ProfilePT> = ({profilePage}) => {
+export const Profile: React.FC<ProfilePT> = ({profilePage, addPost, changeTextariaValue}) => {
     return (
         <div className={s.profile}>
             <div className={s.profileHeaderBG}></div>
             <ProfileInfo name={'Vladimir Zvyagin'} town={'Moscow'} avatar={"https://img.icons8.com/?size=512&id=65220&format=png"}/>
-            <MyPosts postsData={profilePage.postsData}/>
+            <MyPosts postsData={profilePage.postsData}
+                     addPost={addPost}
+                     textariaPostValue = {profilePage.textariaPostValue}
+                     changeTextariaValue = {changeTextariaValue}
+            />
         </div>
     );
 };

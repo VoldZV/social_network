@@ -1,8 +1,9 @@
 .post {
-    width: 240px;
+    width: 350px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: center;
+    gap: 20px;
 }
 
 .postAva {
@@ -10,4 +11,9 @@
     width: 70px;
     border-radius: 100%;
     margin-right: 20px;
+}
+
+.post div {
+    width: 120px;
+    word-break:break-all
 }

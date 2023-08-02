@@ -25,6 +25,7 @@ export type MessageItemType = {
 
 export type ProfilePageType = {
     postsData: PostType[]
+    textariaPostValue: string
 }
 
 export type PostType = {

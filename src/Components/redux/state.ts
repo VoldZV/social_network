@@ -1,4 +1,5 @@
 import {StateType} from "./stateType";
+import {reRenderEntireTree} from "./render";
 
 // State of Application
 export const state: StateType = {
@@ -7,7 +8,8 @@ export const state: StateType = {
             {id: 1, message: 'First post message', likesCount: 7},
             {id: 2, message: 'Second post message', likesCount: 1},
             {id: 3, message: 'Third post message', likesCount: 3},
-        ]
+        ],
+        textariaPostValue: ''
     },
     dialogsPage: {
         dialogsUsersData: [
@@ -34,4 +36,15 @@ export const state: StateType = {
             {id: 6, name: 'Ilya'},
         ]
     }
+}
+
+export const addPost = (postValue: string) => {
+    state.profilePage.postsData.push({id: 4, message: postValue, likesCount: 0 })
+    state.profilePage.textariaPostValue = ''
+    reRenderEntireTree(state)
+}
+
+export const changeTextariaValue = (postValue: string) => {
+    state.profilePage.textariaPostValue = postValue
+    reRenderEntireTree(state)
 }

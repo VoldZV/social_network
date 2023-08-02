@@ -9,9 +9,11 @@ import {StateType} from "./Components/redux/stateType";
 
 type AppPT = {
     state: StateType
+    addPost: (postValue: string) => void
+    changeTextariaValue: (newPostValue: string) => void
 }
 
-function App({state:{profilePage, dialogsPage, navbarPage}}: AppPT) {
+function App({state:{profilePage, dialogsPage, navbarPage}, addPost, changeTextariaValue}: AppPT) {
 
     return (
         <div className="App">
@@ -20,18 +22,24 @@ function App({state:{profilePage, dialogsPage, navbarPage}}: AppPT) {
                 <Navbar navbarPage={navbarPage}/>
                 <div className={'content'}>
                     <Routes>
-                        <Route path={'/profile'} Component={() => <Profile profilePage={profilePage}/>}></Route>
-                        <Route path={'/messages/*'} Component={() => <Dialogs dialogsPage={dialogsPage}/>}></Route>
+                        <Route path={'/profile'}
+                               element={<Profile profilePage={profilePage} addPost = {addPost} changeTextariaValue = {changeTextariaValue}/>}
+                        />
+                        <Route path={'/messages/*'} element={<Dialogs dialogsPage={dialogsPage}/>}></Route>
                     </Routes>
                 </div>
-                <aside className={'aside'}>
-                    <p>Games</p>
-                    <p>Features</p>
-                    <p>Group</p>
-                </aside>
+                <Aside/>
             </div>
         </div>
     );
+}
+
+const Aside = () => {
+    return <aside className={'aside'}>
+        <p>Games</p>
+        <p>Features</p>
+        <p>Group</p>
+    </aside>
 }
 
 export default App;
