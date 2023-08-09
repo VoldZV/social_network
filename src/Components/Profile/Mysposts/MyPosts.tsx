@@ -10,7 +10,6 @@ export type MyPostsPT = {
 }
 
 export const MyPosts: React.FC<MyPostsPT> = ({postsData, addPost, textariaPostValue, changeTextariaValue}) => {
-    console.log(textariaPostValue)
     const posts = postsData.map(post => <Post key={post.id + post.message} message={post.message}
                                               likesCount={post.likesCount}/>)
 
@@ -23,7 +22,6 @@ export const MyPosts: React.FC<MyPostsPT> = ({postsData, addPost, textariaPostVa
     const onChangeTextariaValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const postValue = e.currentTarget.value
         changeTextariaValue(postValue)
-        e.currentTarget.focus()
     }
 
     return (

@@ -1,5 +1,4 @@
 import {StateType} from "./stateType";
-import {reRenderEntireTree} from "./render";
 
 // State of Application
 export const state: StateType = {
@@ -35,16 +34,22 @@ export const state: StateType = {
             {id: 5, name: 'Pavel'},
             {id: 6, name: 'Ilya'},
         ]
-    }
+    },
+    reRenderEntireTree: function () {
+
+    },
+    subscriber: function (observer) {
+        this.reRenderEntireTree = observer
+    },
 }
 
 export const addPost = (postValue: string) => {
     state.profilePage.postsData.push({id: 4, message: postValue, likesCount: 0 })
     state.profilePage.textariaPostValue = ''
-    reRenderEntireTree(state)
+    state.reRenderEntireTree()
 }
 
 export const changeTextariaValue = (postValue: string) => {
     state.profilePage.textariaPostValue = postValue
-    reRenderEntireTree(state)
+    state.reRenderEntireTree()
 }
