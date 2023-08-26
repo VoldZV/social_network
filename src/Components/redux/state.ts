@@ -23,7 +23,8 @@ export const state: StateType = {
             {id: 1, message: 'Hello'},
             {id: 2, message: 'What`up man'},
             {id: 3, message: 'Yo'}
-        ]
+        ],
+        addFormValue: ""
     },
     navbarPage: {
         friends: [
@@ -43,13 +44,13 @@ export const state: StateType = {
     // },
 }
 
-const addPost = (postValue: string) => {
-    state.profilePage.postsData.push({id: 4, message: postValue, likesCount: 0 })
-    state.profilePage.textariaPostValue = ''
-    // state.reRenderEntireTree()
-}
+// const addPost = (postValue: string) => {
+//     state.profilePage.postsData.push({id: 4, message: postValue, likesCount: 0 })
+//     state.profilePage.textariaPostValue = ''
+//     // state.reRenderEntireTree()
+// }
 
-const changeTextariaValue = (postValue: string) => {
-    state.profilePage.textariaPostValue = postValue
-    // state.reRenderEntireTree()
-}
+// const changeTextariaValue = (postValue: string) => {
+//     state.profilePage.textariaPostValue = postValue
+//     // state.reRenderEntireTree()
+// }

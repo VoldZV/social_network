@@ -25,7 +25,7 @@ function App({state:{profilePage, dialogsPage, navbarPage}, dispatch}: AppPT) {
                         <Route path={'/profile'}
                                element={<Profile profilePage={profilePage} dispatch={dispatch}/>}
                         />
-                        <Route path={'/messages/*'} element={<Dialogs dialogsPage={dialogsPage}/>}></Route>
+                        <Route path={'/messages/*'} element={<Dialogs dialogsPage={dialogsPage} dispatch={dispatch}/>}></Route>
                     </Routes>
                 </div>
                 <Aside/>

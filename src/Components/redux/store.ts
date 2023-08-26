@@ -8,7 +8,7 @@ export const store: StoreType = {
                 {id: 2, message: 'Second post message', likesCount: 1},
                 {id: 3, message: 'Third post message', likesCount: 3},
             ],
-            textariaPostValue: ''
+            textariaPostValue: ""
         },
         dialogsPage: {
             dialogsUsersData: [
@@ -23,7 +23,8 @@ export const store: StoreType = {
                 {id: 1, message: 'Hello'},
                 {id: 2, message: 'What`up man'},
                 {id: 3, message: 'Yo'}
-            ]
+            ],
+            addFormValue: ""
         },
         navbarPage: {
             friends: [
@@ -43,12 +44,6 @@ export const store: StoreType = {
     subscriber (observer) {
         this._callSubscriber = observer
     },
-    get getState () {
-        return this._state
-    },
-    set setState (newState: StateType) {
-        this._state = newState
-    },
     dispatch (action: ActionsType) {
         switch (action.type) {
             case "ChangeTextAriaPostValue":
@@ -56,6 +51,12 @@ export const store: StoreType = {
                 break
             case "ADD-POST":
                 this.addPost(this._state.profilePage.textariaPostValue)
+                break
+            case "ADD-MESSAGE":
+                this.addMessage(this._state.dialogsPage.addFormValue)
+                break
+            case "ChangeMessageAddFormValue":
+                this.changeMessageAddFormValue(action.newValue)
                 break
             default:
                 console.log(this._state)
@@ -81,9 +82,35 @@ export const store: StoreType = {
             }
         }
         this._callSubscriber()
+    },
+    addMessage (newMessage: string) {
+        this._state = {
+            ...this._state,
+            dialogsPage: {
+                ...this._state.dialogsPage,
+                messageItemsData: [...this._state.dialogsPage.messageItemsData, {id: 4, message: newMessage}],
+                addFormValue: ""
+            }
+        }
+        this._callSubscriber()
+    },
+    changeMessageAddFormValue (newValue: string) {
+        this._state = {
+            ...this._state,
+            dialogsPage: {
+                ...this._state.dialogsPage,
+                addFormValue: newValue
+            }
+        }
+        this._callSubscriber()
+    },
+    get getState () {
+        return this._state
+    },
+    set setState (newState: StateType) {
+        this._state = newState
     }
 }
-
 
 type StoreType = {
     _state: StateType
@@ -94,9 +121,12 @@ type StoreType = {
     dispatch: (action: ActionsType) => void
     addPost: (postValue: string) => void
     changeTextariaValue: (postValue: string) => void
+    addMessage: (newMessage: string) => void
+    changeMessageAddFormValue: (newValue: string) => void
 }
 
-export type ActionsType = ChangeTextAriaPostValueAT | AddPostAT
+// ActionsType
+export type ActionsType = ChangeTextAriaPostValueAT | AddPostAT | changeMessageAddFormValueAT | addMessageAT
 type ChangeTextAriaPostValueAT = {
     type: "ChangeTextAriaPostValue"
     newValue: string
@@ -104,3 +134,16 @@ type ChangeTextAriaPostValueAT = {
 type AddPostAT = {
     type: "ADD-POST"
 }
+type changeMessageAddFormValueAT = {
+    type: "ChangeMessageAddFormValue"
+    newValue: string
+}
+type addMessageAT = {
+    type: "ADD-MESSAGE"
+}
+
+// Action creators
+export const addPostAC = ():AddPostAT  => ({type: "ADD-POST"})
+export const changeTextariaValueAC = (newValue: string):ChangeTextAriaPostValueAT  => ({type: "ChangeTextAriaPostValue", newValue})
+export const addMessageAC = ():addMessageAT  => ({type: "ADD-MESSAGE"})
+export const changeMessageAddFormValueAC = (newValue: string):changeMessageAddFormValueAT  => ({type: "ChangeMessageAddFormValue", newValue})

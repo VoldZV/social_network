@@ -1,7 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import {Post} from "./Post/Post";
 import {PostType} from "../../redux/stateType";
-import {ActionsType} from "../../redux/store";
+import {ActionsType, addPostAC, changeTextariaValueAC} from "../../redux/store";
 
 export type MyPostsPT = {
     postsData: PostType[]
@@ -16,12 +16,12 @@ export const MyPosts: React.FC<MyPostsPT> = ({postsData, textariaPostValue, disp
     // const textareaRef: RefObject<HTMLTextAreaElement> = React.createRef()
 
     const addPostHandler = () => {
-        if (textariaPostValue) dispatch({type: "ADD-POST"})
+        if (textariaPostValue) dispatch(addPostAC())
     }
 
     const onChangeTextariaValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const postValue = e.currentTarget.value
-        dispatch({type: "ChangeTextAriaPostValue", newValue: postValue})
+        dispatch(changeTextariaValueAC(postValue))
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {

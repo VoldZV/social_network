@@ -11,6 +11,7 @@ export type StateType = {
 export type DialogsPageType = {
     dialogsUsersData: DialogsItemType[]
     messageItemsData: MessageItemType[]
+    addFormValue: string
 }
 
 export type DialogsItemType = {
