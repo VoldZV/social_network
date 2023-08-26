@@ -1,4 +1,4 @@
-import {ProfilePageType, StateType} from "./stateType";
+import {StateType} from "./stateType";
 
 export const store: StoreType = {
     _state: {
@@ -49,8 +49,17 @@ export const store: StoreType = {
     set setState (newState: StateType) {
         this._state = newState
     },
-    get getProfilePage () {
-        return this._state.profilePage
+    dispatch (action: ActionsType) {
+        switch (action.type) {
+            case "ChangeTextAriaPostValue":
+                this.changeTextariaValue(action.newValue)
+                break
+            case "ADD-POST":
+                this.addPost(this._state.profilePage.textariaPostValue)
+                break
+            default:
+                console.log(this._state)
+        }
     },
     addPost (postValue: string) {
         this._state = {
@@ -82,7 +91,16 @@ type StoreType = {
     subscriber: (observer: () => void) => void
     getState: StateType
     setState: StateType
-    getProfilePage: ProfilePageType
+    dispatch: (action: ActionsType) => void
     addPost: (postValue: string) => void
     changeTextariaValue: (postValue: string) => void
+}
+
+export type ActionsType = ChangeTextAriaPostValueAT | AddPostAT
+type ChangeTextAriaPostValueAT = {
+    type: "ChangeTextAriaPostValue"
+    newValue: string
+}
+type AddPostAT = {
+    type: "ADD-POST"
 }

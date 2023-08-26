@@ -2,22 +2,21 @@ import React from 'react';
 import s from './Profile.module.css'
 import {MyPosts} from "./Mysposts/MyPosts";
 import {ProfilePageType} from "../redux/stateType";
+import {ActionsType} from "../redux/store";
 
 type ProfilePT = {
     profilePage: ProfilePageType
-    addPost: (postValue: string) => void
-    changeTextariaValue: (newPostValue: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
-export const Profile: React.FC<ProfilePT> = ({profilePage, addPost, changeTextariaValue}) => {
+export const Profile: React.FC<ProfilePT> = ({profilePage,dispatch}) => {
     return (
         <div className={s.profile}>
             <div className={s.profileHeaderBG}></div>
             <ProfileInfo name={'Vladimir Zvyagin'} town={'Moscow'} avatar={"https://img.icons8.com/?size=512&id=65220&format=png"}/>
             <MyPosts postsData={profilePage.postsData}
-                     addPost={addPost}
                      textariaPostValue = {profilePage.textariaPostValue}
-                     changeTextariaValue = {changeTextariaValue}
+                     dispatch = {dispatch}
             />
         </div>
     );

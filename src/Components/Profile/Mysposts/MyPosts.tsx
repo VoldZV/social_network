@@ -1,27 +1,31 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, KeyboardEvent} from 'react';
 import {Post} from "./Post/Post";
 import {PostType} from "../../redux/stateType";
+import {ActionsType} from "../../redux/store";
 
 export type MyPostsPT = {
     postsData: PostType[]
-    addPost: (postValue: string) => void
-    changeTextariaValue: (newPostValue: string) => void
     textariaPostValue: string
+    dispatch: (action: ActionsType) => void
 }
 
-export const MyPosts: React.FC<MyPostsPT> = ({postsData, addPost, textariaPostValue, changeTextariaValue}) => {
+export const MyPosts: React.FC<MyPostsPT> = ({postsData, textariaPostValue, dispatch}) => {
     const posts = postsData.map(post => <Post key={post.id + post.message} message={post.message}
                                               likesCount={post.likesCount}/>)
 
     // const textareaRef: RefObject<HTMLTextAreaElement> = React.createRef()
 
-    const onClickHandler = () => {
-        if (textariaPostValue) addPost(textariaPostValue)
+    const addPostHandler = () => {
+        if (textariaPostValue) dispatch({type: "ADD-POST"})
     }
 
     const onChangeTextariaValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
         const postValue = e.currentTarget.value
-        changeTextariaValue(postValue)
+        dispatch({type: "ChangeTextAriaPostValue", newValue: postValue})
+    }
+
+    const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if(e.key === "Enter") addPostHandler()
     }
 
     return (
@@ -32,13 +36,14 @@ export const MyPosts: React.FC<MyPostsPT> = ({postsData, addPost, textariaPostVa
                     // ref={textareaRef}
                     value={textariaPostValue}
                     onChange={onChangeTextariaValue}
+                    onKeyDown={onKeyDownHandler}
                     name="addPost"
                     id="area"
                     cols={30}
                     rows={3}
                 >
                 </textarea>
-                <button onClick={onClickHandler}>Add Post</button>
+                <button onClick={addPostHandler}>Add Post</button>
             </div>
             {posts}
         </>

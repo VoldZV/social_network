@@ -6,14 +6,14 @@ import {Profile} from "./Components/Profile/Profile";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from 'react-router-dom';
 import {StateType} from "./Components/redux/stateType";
+import {ActionsType} from "./Components/redux/store";
 
 type AppPT = {
     state: StateType
-    addPost: (postValue: string) => void
-    changeTextariaValue: (newPostValue: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
-function App({state:{profilePage, dialogsPage, navbarPage}, addPost, changeTextariaValue}: AppPT) {
+function App({state:{profilePage, dialogsPage, navbarPage}, dispatch}: AppPT) {
 
     return (
         <div className="App">
@@ -23,7 +23,7 @@ function App({state:{profilePage, dialogsPage, navbarPage}, addPost, changeTexta
                 <div className={'content'}>
                     <Routes>
                         <Route path={'/profile'}
-                               element={<Profile profilePage={profilePage} addPost = {addPost} changeTextariaValue = {changeTextariaValue}/>}
+                               element={<Profile profilePage={profilePage} dispatch={dispatch}/>}
                         />
                         <Route path={'/messages/*'} element={<Dialogs dialogsPage={dialogsPage}/>}></Route>
                     </Routes>
