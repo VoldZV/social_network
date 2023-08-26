@@ -25,7 +25,7 @@ export const MyPosts: React.FC<MyPostsPT> = ({postsData, textariaPostValue, disp
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if(e.key === "Enter") addPostHandler()
+        if(e.key === "Enter" && e.ctrlKey) addPostHandler()
     }
 
     return (
