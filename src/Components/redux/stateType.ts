@@ -3,8 +3,8 @@ export type StateType = {
     profilePage: ProfilePageType,
     dialogsPage: DialogsPageType
     navbarPage: NavbarPageType
-    reRenderEntireTree: () => void
-    subscriber: (observer: () => void) => void
+    // reRenderEntireTree: () => void
+    // subscriber: (observer: () => void) => void
 }
 
 // Dialogs Page type

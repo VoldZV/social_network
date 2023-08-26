@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {addPost, changeTextariaValue, state} from "./Components/redux/state";
 import ReactDOM from "react-dom/client";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
+import {store} from "./Components/redux/store";
 
 
 const root = ReactDOM.createRoot(
@@ -15,9 +15,9 @@ const reRenderEntireTree = () => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state = {state}
-                     addPost = {addPost}
-                     changeTextariaValue = {changeTextariaValue}
+                <App state = {store._state}
+                     addPost = {store.addPost.bind(store)}
+                     changeTextariaValue = {store.changeTextariaValue.bind(store)}
                 />
             </BrowserRouter>
         </React.StrictMode>
@@ -26,7 +26,7 @@ const reRenderEntireTree = () => {
 
 reRenderEntireTree()
 
-state.subscriber(reRenderEntireTree)
+store.subscriber(reRenderEntireTree)
 
 
 // If you want to start measuring performance in your app, pass a function

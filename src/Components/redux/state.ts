@@ -35,21 +35,21 @@ export const state: StateType = {
             {id: 6, name: 'Ilya'},
         ]
     },
-    reRenderEntireTree: function () {
-
-    },
-    subscriber: function (observer) {
-        this.reRenderEntireTree = observer
-    },
+    // reRenderEntireTree: function () {
+    //
+    // },
+    // subscriber: function (observer) {
+    //     this.reRenderEntireTree = observer
+    // },
 }
 
-export const addPost = (postValue: string) => {
+const addPost = (postValue: string) => {
     state.profilePage.postsData.push({id: 4, message: postValue, likesCount: 0 })
     state.profilePage.textariaPostValue = ''
-    state.reRenderEntireTree()
+    // state.reRenderEntireTree()
 }
 
-export const changeTextariaValue = (postValue: string) => {
+const changeTextariaValue = (postValue: string) => {
     state.profilePage.textariaPostValue = postValue
-    state.reRenderEntireTree()
+    // state.reRenderEntireTree()
 }
