@@ -2,11 +2,12 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Diaolgs.module.css'
 import {NavLink} from "react-router-dom";
 import {DialogsPageType} from "../redux/stateType";
-import {ActionsType, addMessageAC, changeMessageAddFormValueAC} from "../redux/store";
+import {DispatchActionType} from "../redux/store";
+import {addMessageAC, changeMessageAddFormValueAC} from "../redux/reducers/DialogsReducer";
 
 type DialogsPT = {
     dialogsPage: DialogsPageType
-    dispatch: (action: ActionsType) => void
+    dispatch: (action: DispatchActionType) => void
 }
 
 export const Dialogs: React.FC<DialogsPT> = ({

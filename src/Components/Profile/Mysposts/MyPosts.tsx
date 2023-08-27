@@ -1,12 +1,13 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import {Post} from "./Post/Post";
 import {PostType} from "../../redux/stateType";
-import {ActionsType, addPostAC, changeTextariaValueAC} from "../../redux/store";
+import {DispatchActionType} from "../../redux/store";
+import {addPostAC, changeTextariaValueAC} from "../../redux/reducers/ProfileReducer";
 
 export type MyPostsPT = {
     postsData: PostType[]
     textariaPostValue: string
-    dispatch: (action: ActionsType) => void
+    dispatch: (action: DispatchActionType) => void
 }
 
 export const MyPosts: React.FC<MyPostsPT> = ({postsData, textariaPostValue, dispatch}) => {

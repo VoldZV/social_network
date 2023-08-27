@@ -6,11 +6,11 @@ import {Profile} from "./Components/Profile/Profile";
 import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from 'react-router-dom';
 import {StateType} from "./Components/redux/stateType";
-import {ActionsType} from "./Components/redux/store";
+import {DispatchActionType} from "./Components/redux/store";
 
 type AppPT = {
     state: StateType
-    dispatch: (action: ActionsType) => void
+    dispatch: (action: DispatchActionType) => void
 }
 
 function App({state:{profilePage, dialogsPage, navbarPage}, dispatch}: AppPT) {

@@ -1,4 +1,7 @@
 import {StateType} from "./stateType";
+import {ProfileReducer, ProfileReducerActionsType} from "./reducers/ProfileReducer";
+import DialogsReducer, {DialogsReducerActionsType} from "./reducers/DialogsReducer";
+import NavBarReducer, {NavBarReducerActionsType} from "./reducers/NavBarReducer";
 
 export const store: StoreType = {
     _state: {
@@ -36,7 +39,6 @@ export const store: StoreType = {
                 {id: 6, name: 'Ilya'},
             ]
         },
-
     },
     _callSubscriber () {
 
@@ -44,66 +46,54 @@ export const store: StoreType = {
     subscriber (observer) {
         this._callSubscriber = observer
     },
-    dispatch (action: ActionsType) {
-        switch (action.type) {
-            case "ChangeTextAriaPostValue":
-                this.changeTextariaValue(action.newValue)
-                break
-            case "ADD-POST":
-                this.addPost(this._state.profilePage.textariaPostValue)
-                break
-            case "ADD-MESSAGE":
-                this.addMessage(this._state.dialogsPage.addFormValue)
-                break
-            case "ChangeMessageAddFormValue":
-                this.changeMessageAddFormValue(action.newValue)
-                break
-            default:
-                console.log(this._state)
-        }
-    },
-    addPost (postValue: string) {
-        this._state = {
-            ...this._state,
-            profilePage: {
-                ...this._state.profilePage,
-                postsData: [...this._state.profilePage.postsData, {id: 4, message: postValue, likesCount: 0}],
-                textariaPostValue: ""
-            }
-        }
+    dispatch (action) {
+        this._state.profilePage = ProfileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action)
+        this._state.navbarPage = NavBarReducer(this._state.navbarPage, action)
         this._callSubscriber()
     },
-    changeTextariaValue (postValue: string) {
-        this._state = {
-            ...this._state,
-            profilePage: {
-                ...this._state.profilePage,
-                textariaPostValue: postValue
-            }
-        }
-        this._callSubscriber()
-    },
-    addMessage (newMessage: string) {
-        this._state = {
-            ...this._state,
-            dialogsPage: {
-                ...this._state.dialogsPage,
-                messageItemsData: [...this._state.dialogsPage.messageItemsData, {id: 4, message: newMessage}],
-                addFormValue: ""
-            }
-        }
-        this._callSubscriber()
-    },
-    changeMessageAddFormValue (newValue: string) {
-        this._state = {
-            ...this._state,
-            dialogsPage: {
-                ...this._state.dialogsPage,
-                addFormValue: newValue
-            }
-        }
-        this._callSubscriber()
-    },
+    // addPost (postValue: string) {
+    //     this._state = {
+    //         ...this._state,
+    //         profilePage: {
+    //             ...this._state.profilePage,
+    //             postsData: [...this._state.profilePage.postsData, {id: 4, message: postValue, likesCount: 0}],
+    //             textariaPostValue: ""
+    //         }
+    //     }
+    //     this._callSubscriber()
+    // },
+    // changeTextariaValue (postValue: string) {
+    //     this._state = {
+    //         ...this._state,
+    //         profilePage: {
+    //             ...this._state.profilePage,
+    //             textariaPostValue: postValue
+    //         }
+    //     }
+    //     this._callSubscriber()
+    // },
+    // addMessage (newMessage: string) {
+    //     this._state = {
+    //         ...this._state,
+    //         dialogsPage: {
+    //             ...this._state.dialogsPage,
+    //             messageItemsData: [...this._state.dialogsPage.messageItemsData, {id: 4, message: newMessage}],
+    //             addFormValue: ""
+    //         }
+    //     }
+    //     this._callSubscriber()
+    // },
+    // changeMessageAddFormValue (newValue: string) {
+    //     this._state = {
+    //         ...this._state,
+    //         dialogsPage: {
+    //             ...this._state.dialogsPage,
+    //             addFormValue: newValue
+    //         }
+    //     }
+    //     this._callSubscriber()
+    // },
     get getState () {
         return this._state
     },
@@ -118,32 +108,12 @@ type StoreType = {
     subscriber: (observer: () => void) => void
     getState: StateType
     setState: StateType
-    dispatch: (action: ActionsType) => void
-    addPost: (postValue: string) => void
-    changeTextariaValue: (postValue: string) => void
-    addMessage: (newMessage: string) => void
-    changeMessageAddFormValue: (newValue: string) => void
+    dispatch: (action: DispatchActionType) => void
+    // addPost: (postValue: string) => void
+    // changeTextariaValue: (postValue: string) => void
+    // addMessage: (newMessage: string) => void
+    // changeMessageAddFormValue: (newValue: string) => void
 }
 
-// ActionsType
-export type ActionsType = ChangeTextAriaPostValueAT | AddPostAT | changeMessageAddFormValueAT | addMessageAT
-type ChangeTextAriaPostValueAT = {
-    type: "ChangeTextAriaPostValue"
-    newValue: string
-}
-type AddPostAT = {
-    type: "ADD-POST"
-}
-type changeMessageAddFormValueAT = {
-    type: "ChangeMessageAddFormValue"
-    newValue: string
-}
-type addMessageAT = {
-    type: "ADD-MESSAGE"
-}
+export type DispatchActionType = ProfileReducerActionsType | DialogsReducerActionsType | NavBarReducerActionsType
 
-// Action creators
-export const addPostAC = ():AddPostAT  => ({type: "ADD-POST"})
-export const changeTextariaValueAC = (newValue: string):ChangeTextAriaPostValueAT  => ({type: "ChangeTextAriaPostValue", newValue})
-export const addMessageAC = ():addMessageAT  => ({type: "ADD-MESSAGE"})
-export const changeMessageAddFormValueAC = (newValue: string):changeMessageAddFormValueAT  => ({type: "ChangeMessageAddFormValue", newValue})
