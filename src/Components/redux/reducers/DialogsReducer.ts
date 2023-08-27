@@ -1,7 +1,7 @@
 import {DialogsPageType} from "../stateType";
-import {DispatchActionType} from "../store";
+import {DispatchActionType, store} from "../store";
 
-export const DialogsReducer = (state: DialogsPageType, action: DispatchActionType): DialogsPageType => {
+export const DialogsReducer = (state: DialogsPageType = store._state.dialogsPage, action: DispatchActionType): DialogsPageType => {
     switch (action.type) {
         case "ChangeMessageAddFormValue":
             return {

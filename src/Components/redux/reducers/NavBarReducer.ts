@@ -1,7 +1,7 @@
 import {NavbarPageType} from "../stateType";
-import {DispatchActionType} from "../store";
+import {DispatchActionType, store} from "../store";
 
-export const NavBarReducer = (state: NavbarPageType, action: DispatchActionType): NavbarPageType => {
+export const NavBarReducer = (state: NavbarPageType = store._state.navbarPage, action: DispatchActionType): NavbarPageType => {
     switch (action.type) {
         case "CHANGE-ANYTHING":
             return {...state}

@@ -1,7 +1,7 @@
 import {ProfilePageType} from "../stateType";
-import {DispatchActionType} from "../store";
+import {DispatchActionType, store} from "../store";
 
-export const ProfileReducer = (state: ProfilePageType, action: DispatchActionType): ProfilePageType => {
+export const ProfileReducer = (state: ProfilePageType = store._state.profilePage, action: DispatchActionType): ProfilePageType => {
     switch (action.type) {
         case "ChangeTextAriaPostValue":
             return {
@@ -29,9 +29,11 @@ type ChangeTextAriaPostValueAT = {
     type: "ChangeTextAriaPostValue"
     newValue: string
 }
+// type ChangeTextAriaPostValueAT = Action<"ChangeTextAriaPostValue"> & {newValue: string}
 type AddPostAT = {
     type: "ADD-POST"
 }
+// type AddPostAT = Action<'ADD-POST'>
 
 // Action creators
 export const addPostAC = ():AddPostAT  => ({type: "ADD-POST"})
