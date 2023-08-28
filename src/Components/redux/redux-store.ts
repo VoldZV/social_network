@@ -9,5 +9,6 @@ const rootReducer = combineReducers({
     dialogsPage: DialogsReducer,
     navbarPage: NavBarReducer
 })
+export type Tstore = Store<ReturnType<typeof rootReducer>, DispatchActionType>
 
-export const reduxStore: Store<ReturnType<typeof rootReducer>, DispatchActionType> = legacy_createStore(rootReducer)
+export const reduxStore: Tstore = legacy_createStore(rootReducer)

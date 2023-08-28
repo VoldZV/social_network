@@ -3,17 +3,18 @@ import './App.css';
 import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Profile} from "./Components/Profile/Profile";
-import {Dialogs} from "./Components/Dialogs/Dialogs";
 import {Route, Routes} from 'react-router-dom';
 import {StateType} from "./Components/redux/stateType";
 import {DispatchActionType} from "./Components/redux/store";
+import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
+import {reduxStore} from "./Components/redux/redux-store";
 
 type AppPT = {
     state: StateType
     dispatch: (action: DispatchActionType) => void
 }
 
-function App({state:{profilePage, dialogsPage, navbarPage}, dispatch}: AppPT) {
+function App({state:{navbarPage}, dispatch}: AppPT) {
 
     return (
         <div className="App">
@@ -23,9 +24,9 @@ function App({state:{profilePage, dialogsPage, navbarPage}, dispatch}: AppPT) {
                 <div className={'content'}>
                     <Routes>
                         <Route path={'/profile'}
-                               element={<Profile profilePage={profilePage} dispatch={dispatch}/>}
+                               element={<Profile/>}
                         />
-                        <Route path={'/messages/*'} element={<Dialogs dialogsPage={dialogsPage} dispatch={dispatch}/>}></Route>
+                        <Route path={'/messages/*'} element={<DialogsContainer store={reduxStore}/>}></Route>
                     </Routes>
                 </div>
                 <Aside/>

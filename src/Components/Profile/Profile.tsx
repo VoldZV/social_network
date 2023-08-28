@@ -1,23 +1,18 @@
 import React from 'react';
 import s from './Profile.module.css'
-import {MyPosts} from "./Mysposts/MyPosts";
-import {ProfilePageType} from "../redux/stateType";
-import {DispatchActionType} from "../redux/store";
+import {reduxStore} from "../redux/redux-store";
+import {MyPostsContainer} from "./Mysposts/MyPostsContainer";
 
 type ProfilePT = {
-    profilePage: ProfilePageType
-    dispatch: (action: DispatchActionType) => void
+
 }
 
-export const Profile: React.FC<ProfilePT> = ({profilePage,dispatch}) => {
+export const Profile: React.FC<ProfilePT> = (props) => {
     return (
         <div className={s.profile}>
             <div className={s.profileHeaderBG}></div>
             <ProfileInfo name={'Vladimir Zvyagin'} town={'Moscow'} avatar={"https://img.icons8.com/?size=512&id=65220&format=png"}/>
-            <MyPosts postsData={profilePage.postsData}
-                     textariaPostValue = {profilePage.textariaPostValue}
-                     dispatch = {dispatch}
-            />
+            <MyPostsContainer store={reduxStore}/>
         </div>
     );
 };

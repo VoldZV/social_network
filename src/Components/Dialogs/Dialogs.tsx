@@ -2,17 +2,15 @@ import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Diaolgs.module.css'
 import {NavLink} from "react-router-dom";
 import {DialogsPageType} from "../redux/stateType";
-import {DispatchActionType} from "../redux/store";
-import {addMessageAC, changeMessageAddFormValueAC} from "../redux/reducers/DialogsReducer";
 
 type DialogsPT = {
     dialogsPage: DialogsPageType
-    dispatch: (action: DispatchActionType) => void
+    addMessage: () => void
+    changeAddFormValue: (newMessage: string) => void
 }
 
 export const Dialogs: React.FC<DialogsPT> = ({
-                                                 dispatch,
-                                                 dialogsPage: {dialogsUsersData, messageItemsData, addFormValue}
+                                                 dialogsPage: {dialogsUsersData, messageItemsData, addFormValue},addMessage, changeAddFormValue
                                              }) => {
 
     const dialogsItems = dialogsUsersData.map((user) => <DialogsItem key={user.id + user.name} name={user.name}
@@ -20,12 +18,11 @@ export const Dialogs: React.FC<DialogsPT> = ({
     const messages = messageItemsData.map(item => <Message key={item.id} message={item.message}/>)
 
     const addMessageHandler = () => {
-        if (addFormValue) dispatch(addMessageAC())
+        addMessage()
     }
 
     const onChangeAddFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        const newMessage = e.currentTarget.value
-        dispatch(changeMessageAddFormValueAC(newMessage))
+        changeAddFormValue(e.currentTarget.value)
     }
 
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
