@@ -5,6 +5,7 @@ import ReactDOM from "react-dom/client";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import {reduxStore} from "./Components/redux/redux-store";
+import {Provider} from "./Components/redux/context/context";
 
 
 const root = ReactDOM.createRoot(
@@ -15,9 +16,9 @@ const reRenderEntireTree = () => {
     root.render(
         <React.StrictMode>
             <BrowserRouter>
-                <App state = {reduxStore.getState()}
-                     dispatch = {reduxStore.dispatch}
-                />
+                <Provider store={reduxStore}>
+                    <App/>
+                </Provider>
             </BrowserRouter>
         </React.StrictMode>
     );

@@ -4,29 +4,31 @@ import {Header} from "./Components/Header/Header";
 import {Navbar} from "./Components/Navbar/Navbar";
 import {Profile} from "./Components/Profile/Profile";
 import {Route, Routes} from 'react-router-dom';
-import {StateType} from "./Components/redux/stateType";
-import {DispatchActionType} from "./Components/redux/store";
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
-import {reduxStore} from "./Components/redux/redux-store";
+import {StoreContext} from './Components/redux/context/context';
 
-type AppPT = {
-    state: StateType
-    dispatch: (action: DispatchActionType) => void
-}
+// type AppPT = {
+//
+// }
 
-function App({state:{navbarPage}, dispatch}: AppPT) {
+function App() {
 
     return (
         <div className="App">
             <Header/>
             <div className={'underHeader'}>
-                <Navbar navbarPage={navbarPage}/>
+                <StoreContext.Consumer>
+                    {(store => <Navbar navbarPage={store.getState().navbarPage}/>)}
+                </StoreContext.Consumer>
                 <div className={'content'}>
                     <Routes>
                         <Route path={'/profile'}
                                element={<Profile/>}
                         />
-                        <Route path={'/messages/*'} element={<DialogsContainer store={reduxStore}/>}></Route>
+                        <Route path={'/messages/*'} element={<StoreContext.Consumer>
+                            {(store => <DialogsContainer store={store}/>)}
+                        </StoreContext.Consumer>}>
+                        </Route>
                     </Routes>
                 </div>
                 <Aside/>
