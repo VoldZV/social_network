@@ -22,11 +22,8 @@ function App() {
                 </StoreContext.Consumer>
                 <div className={'content'}>
                     <Routes>
-                        <Route path={'/profile'}
-                               element={<Profile/>}
-                        />
-                        <Route path={'/messages/*'} element={<DialogsContainer/>}>
-                        </Route>
+                        <Route path={'/profile'} element={<Profile/>}/>
+                        <Route path={'/messages/*'} element={<DialogsContainer/>}/>
                     </Routes>
                 </div>
                 <Aside/>

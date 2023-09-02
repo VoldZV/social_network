@@ -1,36 +1,33 @@
 import React from "react";
-import {ProfilePageType} from "../../redux/stateType";
 import {addPostAC, changeTextariaValueAC} from "../../redux/reducers/ProfileReducer";
 import {MyPosts} from "./MyPosts";
-import {Tstore} from "../../redux/redux-store";
 import {StoreContext} from "../../redux/context/context";
 
-export type MyPostsContainerPT = {
-    store: Tstore
-}
-export const MyPostsContainer: React.FC<MyPostsContainerPT> = ({store, store: {dispatch}}) => {
-    const state: ProfilePageType = store.getState().profilePage
+
+export const MyPostsContainer = () => {
 
     // const textareaRef: RefObject<HTMLTextAreaElement> = React.createRef()
-
-    const addPost = () => {
-        if (state.textariaPostValue) dispatch(addPostAC())
-    }
-
-    const changeTextAriaValue = (postValue: string) => {
-        dispatch(changeTextariaValueAC(postValue))
-    }
-
     return (
         <StoreContext.Consumer>
             {
-                (store => (
-                    <MyPosts postsData={store.getState().profilePage.postsData}
-                             textariaPostValue={state.textariaPostValue}
-                             addPost={addPost}
-                             changeTextAriaValue={changeTextAriaValue}
-                    />
-                ))
+                (store => {
+                    const state = store.getState()
+                    const textariaPostValue = state.profilePage.textariaPostValue
+                    const postsData = state.profilePage.postsData
+
+                    const addPost = () => {
+                        if (textariaPostValue) store.dispatch(addPostAC())
+                    }
+                    const changeTextAriaValue = (postValue: string) => {
+                        store.dispatch(changeTextariaValueAC(postValue))
+                    }
+
+                    return (<MyPosts postsData={postsData}
+                                     textariaPostValue={textariaPostValue}
+                                     addPost={addPost}
+                                     changeTextAriaValue={changeTextAriaValue}
+                    />)
+                })
             }
         </StoreContext.Consumer>
     );

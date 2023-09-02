@@ -1,18 +1,17 @@
 import React from 'react';
 import s from './Profile.module.css'
-import {reduxStore} from "../redux/redux-store";
 import {MyPostsContainer} from "./Mysposts/MyPostsContainer";
 
 type ProfilePT = {
 
 }
 
-export const Profile: React.FC<ProfilePT> = (props) => {
+export const Profile: React.FC<ProfilePT> = () => {
     return (
         <div className={s.profile}>
             <div className={s.profileHeaderBG}></div>
             <ProfileInfo name={'Vladimir Zvyagin'} town={'Moscow'} avatar={"https://img.icons8.com/?size=512&id=65220&format=png"}/>
-            <MyPostsContainer store={reduxStore}/>
+            <MyPostsContainer/>
         </div>
     );
 };
