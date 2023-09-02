@@ -1,28 +1,32 @@
 import React from 'react';
 import {addMessageAC, changeMessageAddFormValueAC} from "../redux/reducers/DialogsReducer";
 import {Dialogs} from "./Dialogs";
-import {Tstore} from "../redux/redux-store";
+import {StoreContext} from "../redux/context/context";
 
-type DialogsContainerPT = {
-    store: Tstore
-}
 
-export const DialogsContainer: React.FC<DialogsContainerPT> = ({store,store:{dispatch}}) => {
-    const dialogsPageState = store.getState().dialogsPage
+export const DialogsContainer = () => {
 
-    const addMessage = () => {
-        if (dialogsPageState.addFormValue) dispatch(addMessageAC())
-    }
-
-    const changeAddFormValue = (newMessage: string) => {
-        dispatch(changeMessageAddFormValueAC(newMessage))
-    }
 
     return (
-        <Dialogs dialogsPage={dialogsPageState}
-                 addMessage={addMessage}
-                 changeAddFormValue={changeAddFormValue}
-        />
+        <StoreContext.Consumer>
+            {(store => {
+                    const dialogsPageState = store.getState().dialogsPage
+
+                    const addMessage = () => {
+                        if (dialogsPageState.addFormValue) store.dispatch(addMessageAC())
+                    }
+
+                    const changeAddFormValue = (newMessage: string) => {
+                        store.dispatch(changeMessageAddFormValueAC(newMessage))
+                    }
+
+                    return <Dialogs dialogsPage={dialogsPageState}
+                                    addMessage={addMessage}
+                                    changeAddFormValue={changeAddFormValue}
+                    />
+                }
+            )}
+        </StoreContext.Consumer>
     );
 };
 

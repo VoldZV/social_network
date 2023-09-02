@@ -1,9 +1,9 @@
 import React, {Context} from "react";
-import {reduxStore, Tstore} from "../redux-store";
+import {Tstore} from "../redux-store";
 
 type TstoreContext = Context<Tstore>
 
-export const StoreContext: TstoreContext = React.createContext<Tstore>(reduxStore)
+export const StoreContext: TstoreContext = React.createContext<Tstore>({} as Tstore )
 
 
 type ProviderPT = {

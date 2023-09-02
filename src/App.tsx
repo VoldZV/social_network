@@ -25,9 +25,7 @@ function App() {
                         <Route path={'/profile'}
                                element={<Profile/>}
                         />
-                        <Route path={'/messages/*'} element={<StoreContext.Consumer>
-                            {(store => <DialogsContainer store={store}/>)}
-                        </StoreContext.Consumer>}>
+                        <Route path={'/messages/*'} element={<DialogsContainer/>}>
                         </Route>
                     </Routes>
                 </div>
