@@ -1,16 +1,8 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import {Post} from "./Post/Post";
-import {PostType} from "../../redux/stateType";
+import {TmyPosts} from "./MyPostsContainer";
 
-export type MyPostsPT = {
-    postsData: PostType[]
-    textariaPostValue: string
-    addPost: () => void
-    changeTextAriaValue: (postValue: string) => void
-}
-
-
-export const MyPosts: React.FC<MyPostsPT> = ({postsData, textariaPostValue, addPost, changeTextAriaValue}) => {
+export const MyPosts: React.FC<TmyPosts> = ({postsData, textariaPostValue, addPost, changeTextAriaValue}) => {
     const posts = postsData.map(post => <Post key={post.id + post.message} message={post.message}
                                               likesCount={post.likesCount}/>)
 
@@ -20,8 +12,12 @@ export const MyPosts: React.FC<MyPostsPT> = ({postsData, textariaPostValue, addP
         changeTextAriaValue(e.currentTarget.value)
     }
 
+    const addPostHandler = () => {
+        if(textariaPostValue) addPost()
+    }
+
     const onKeyDownHandler = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if(e.key === "Enter" && e.ctrlKey) addPost()
+        if(e.key === "Enter" && e.ctrlKey) addPostHandler()
     }
 
     return (
@@ -39,7 +35,7 @@ export const MyPosts: React.FC<MyPostsPT> = ({postsData, textariaPostValue, addP
                     rows={3}
                 >
                 </textarea>
-                <button onClick={addPost}>Add Post</button>
+                <button onClick={addPostHandler}>Add Post</button>
             </div>
             {posts}
         </>

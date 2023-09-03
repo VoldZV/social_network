@@ -1,5 +1,6 @@
 import {ProfilePageType} from "../stateType";
-import {DispatchActionType, store} from "../store";
+import {store} from "../store";
+import {DispatchActionType} from "../redux-store";
 
 export const ProfileReducer = (state: ProfilePageType = store._state.profilePage, action: DispatchActionType): ProfilePageType => {
     switch (action.type) {

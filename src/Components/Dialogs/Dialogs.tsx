@@ -1,15 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent} from 'react';
 import s from './Diaolgs.module.css'
 import {NavLink} from "react-router-dom";
-import {DialogsPageType} from "../redux/stateType";
+import {Tdialogs} from "./DialogsContainer";
 
-type DialogsPT = {
-    dialogsPage: DialogsPageType
-    addMessage: () => void
-    changeAddFormValue: (newMessage: string) => void
-}
-
-export const Dialogs: React.FC<DialogsPT> = ({
+export const Dialogs: React.FC<Tdialogs> = ({
                                                  dialogsPage: {dialogsUsersData, messageItemsData, addFormValue},addMessage, changeAddFormValue
                                              }) => {
 
@@ -18,7 +12,7 @@ export const Dialogs: React.FC<DialogsPT> = ({
     const messages = messageItemsData.map(item => <Message key={item.id} message={item.message}/>)
 
     const addMessageHandler = () => {
-        addMessage()
+        if(addFormValue) addMessage()
     }
 
     const onChangeAddFormValue = (e: ChangeEvent<HTMLTextAreaElement>) => {

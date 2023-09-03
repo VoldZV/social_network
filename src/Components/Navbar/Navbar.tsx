@@ -1,15 +1,10 @@
 import React from 'react';
 import s from './Navbar.module.css'
 import {NavLink} from "react-router-dom";
-import {NavbarPageType} from "../redux/stateType";
 import {Friends} from "./Friends/Friends";
+import {TnavBar} from "./NavbarContainer";
 
-
-type NavbarPropsType = {
-    navbarPage: NavbarPageType
-}
-
-export const Navbar: React.FC<NavbarPropsType> = ({navbarPage}) => {
+export const Navbar: React.FC<TnavBar> = ({navbarPage}) => {
 
     return (
         <>
@@ -26,3 +21,5 @@ export const Navbar: React.FC<NavbarPropsType> = ({navbarPage}) => {
         </>
     );
 };
+
+

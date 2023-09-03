@@ -1,7 +1,8 @@
 import {StateType} from "./stateType";
-import {ProfileReducer, ProfileReducerActionsType} from "./reducers/ProfileReducer";
-import DialogsReducer, {DialogsReducerActionsType} from "./reducers/DialogsReducer";
-import NavBarReducer, {NavBarReducerActionsType} from "./reducers/NavBarReducer";
+import {ProfileReducer} from "./reducers/ProfileReducer";
+import DialogsReducer from "./reducers/DialogsReducer";
+import NavBarReducer from "./reducers/NavBarReducer";
+import {DispatchActionType} from "./redux-store";
 
 export const store: StoreType = {
     _state: {
@@ -114,6 +115,4 @@ type StoreType = {
     // addMessage: (newMessage: string) => void
     // changeMessageAddFormValue: (newValue: string) => void
 }
-
-export type DispatchActionType = ProfileReducerActionsType | DialogsReducerActionsType | NavBarReducerActionsType
 

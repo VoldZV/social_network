@@ -1,5 +1,6 @@
 import {DialogsPageType} from "../stateType";
-import {DispatchActionType, store} from "../store";
+import {store} from "../store";
+import {DispatchActionType} from "../redux-store";
 
 export const DialogsReducer = (state: DialogsPageType = store._state.dialogsPage, action: DispatchActionType): DialogsPageType => {
     switch (action.type) {

@@ -1,14 +1,18 @@
 import {combineReducers, legacy_createStore, Store} from "redux";
-import ProfileReducer from "./reducers/ProfileReducer";
-import DialogsReducer from "./reducers/DialogsReducer";
-import NavBarReducer from "./reducers/NavBarReducer";
-import {DispatchActionType} from "./store";
+import ProfileReducer, {ProfileReducerActionsType} from "./reducers/ProfileReducer";
+import DialogsReducer, {DialogsReducerActionsType} from "./reducers/DialogsReducer";
+import NavBarReducer, {NavBarReducerActionsType} from "./reducers/NavBarReducer";
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
     profilePage: ProfileReducer,
     dialogsPage: DialogsReducer,
     navbarPage: NavBarReducer
 })
-export type Tstore = Store<ReturnType<typeof rootReducer>, DispatchActionType>
+
+export type AppStateType = ReturnType<typeof rootReducer>
+
+export type DispatchActionType = ProfileReducerActionsType | DialogsReducerActionsType | NavBarReducerActionsType
+
+export type Tstore = Store<AppStateType, DispatchActionType>
 
 export const reduxStore: Tstore = legacy_createStore(rootReducer)
