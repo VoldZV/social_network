@@ -2,7 +2,7 @@ import React from 'react';
 import {UsersPageType, UserType} from "../redux/stateType";
 import {AppStateType, DispatchActionType} from "../redux/redux-store";
 import {Dispatch} from "redux";
-import {getUsersAC} from "../redux/reducers/UsersReducer";
+import {setUsersAC, toggleFollowAC} from "../redux/reducers/UsersReducer";
 import {connect} from "react-redux";
 import {Users} from "./Users";
 
@@ -15,12 +15,16 @@ const mstpUsers = (state: AppStateType): TmstpUsers => ({
 })
 
 type TmdtpUsers =  {
-    getUsers: (users: UserType[]) => void
+    setUsers: (users: UserType[]) => void
+    toggleFollow: (userId: number) => void
 }
 
 const mdtpUsers = (dispatch: Dispatch<DispatchActionType>): TmdtpUsers => ({
-    getUsers: (users: UserType[]) => {
-        dispatch(getUsersAC(users))
+    setUsers: (users: UserType[]) => {
+        dispatch(setUsersAC(users))
+    },
+    toggleFollow: (userId: number) => {
+        dispatch(toggleFollowAC(userId))
     }
 })
 
