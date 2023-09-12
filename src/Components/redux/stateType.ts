@@ -7,6 +7,24 @@ export type StateType = {
     // subscriber: (observer: () => void) => void
 }
 
+// Users Page Type
+export type UsersPageType = {
+    users : UserType[]
+    totalCount: number
+    error: null | string
+}
+
+export type UserType = {
+    name: string
+    id: number
+    photos: {
+        small: null | string
+        large: null | string
+    },
+    status: null | string
+    followed: boolean
+}
+
 // Dialogs Page type
 export type DialogsPageType = {
     dialogsUsersData: DialogsItemType[]

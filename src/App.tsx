@@ -6,6 +6,7 @@ import {Route, Routes} from 'react-router-dom';
 import {DialogsContainer} from "./Components/Dialogs/DialogsContainer";
 import {NavbarContainer} from "./Components/Navbar/NavbarContainer";
 import {Aside} from "./Aside/Aside";
+import {UsersContainer} from "./Components/Users/UsersContainer";
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Routes>
                         <Route path={'/profile'} element={<Profile/>}/>
                         <Route path={'/messages/*'} element={<DialogsContainer/>}/>
+                        <Route path={'/users'} element={<UsersContainer/>}/>
                     </Routes>
                 </div>
                 <Aside/>

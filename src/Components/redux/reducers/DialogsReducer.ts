@@ -21,7 +21,7 @@ export const DialogsReducer = (state: DialogsPageType = store._state.dialogsPage
 };
 
 
-// Reducer and ActionsType
+// Reducer and Actions Types
 export type DialogsReducerActionsType = changeMessageAddFormValueAT | addMessageAT
 type changeMessageAddFormValueAT = {
     type: "ChangeMessageAddFormValue"

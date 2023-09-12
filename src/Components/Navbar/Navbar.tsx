@@ -13,6 +13,7 @@ export const Navbar: React.FC<TnavBar> = ({navbarPage}) => {
                 <NavLink className={({isActive}) => isActive ? s.activeLink : undefined} to="/profile">Profile</NavLink>
                 <NavLink className={({isActive}) => isActive ? s.activeLink : undefined}
                          to="/messages">Messages</NavLink>
+                <NavLink className={({isActive}) => isActive ? s.activeLink : undefined} to="/users">Users</NavLink>
                 <NavLink className={({isActive}) => isActive ? s.activeLink : undefined} to="/news">News</NavLink>
                 <NavLink className={({isActive}) => isActive ? s.activeLink : undefined} to="/music">Music</NavLink>
                 <Friends friends = {navbarPage.friends}/>
