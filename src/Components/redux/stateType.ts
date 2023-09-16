@@ -11,6 +11,8 @@ export type StateType = {
 export type UsersPageType = {
     users : UserType[]
     totalCount: number
+    pageSize: number
+    currentPage: number
     error: null | string
 }
 
