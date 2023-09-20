@@ -1,17 +1,18 @@
 import React from 'react';
 import {UsersPageType, UserType} from "../redux/stateType";
-import {AppStateType, DispatchActionType} from "../redux/redux-store";
-import {Dispatch} from "redux";
-import {setCurrentPageAC, setTotalCountAC, setUsersAC, toggleFollowAC} from "../redux/reducers/UsersReducer";
+import {AppStateType} from "../redux/redux-store";
+import {setCurrentPage, setTotalCount, setUsers, toggleFollow, toggleIsLoading} from "../redux/reducers/UsersReducer";
 import {connect} from "react-redux";
 import {UsersClassComponent} from "./UsersClassComponent";
 
 type TmstpUsers = {
     usersPage: UsersPageType
+    isLoading: boolean
 }
 
 const mstpUsers = (state: AppStateType): TmstpUsers => ({
-    usersPage: state.usersPage //отрефакторить добавить отдельно users[] , totacount, pagesize
+    usersPage: state.usersPage, //отрефакторить добавить отдельно users[] , totacount, pagesize
+    isLoading: state.usersPage.isLoading
 })
 
 type TmdtpUsers =  {
@@ -19,22 +20,33 @@ type TmdtpUsers =  {
     toggleFollow: (userId: number) => void
     setTotalCount: (totalCount: number) => void
     setCurrentPage: (totalCount: number) => void
+    toggleIsLoading: () => void
 }
 
-const mdtpUsers = (dispatch: Dispatch<DispatchActionType>): TmdtpUsers => ({
-    setUsers: (users: UserType[]) => {
-        dispatch(setUsersAC(users))
-    },
-    toggleFollow: (userId: number) => {
-        dispatch(toggleFollowAC(userId))
-    },
-    setTotalCount: (totalCount: number) => {
-        dispatch(setTotalCountAC(totalCount))
-    },
-    setCurrentPage: (currentPage: number) => {
-        dispatch(setCurrentPageAC(currentPage))
-    },
-})
+// const mdtpUsers = (dispatch: Dispatch<DispatchActionType>): TmdtpUsers => ({
+//     setUsers: (users: UserType[]) => {
+//         dispatch(setUsers(users))
+//     },
+//     toggleFollow: (userId: number) => {
+//         dispatch(toggleFollow(userId))
+//     },
+//     setTotalCount: (totalCount: number) => {
+//         dispatch(setTotalCount(totalCount))
+//     },
+//     setCurrentPage: (currentPage: number) => {
+//         dispatch(setCurrentPage(currentPage))
+//     },
+//     toggleIsLoading: () => {
+//         dispatch(toggleIsLoading())
+//     },
+// })
+const mdtpUsers: TmdtpUsers = {
+    setUsers,
+    toggleFollow,
+    setTotalCount,
+    setCurrentPage,
+    toggleIsLoading,
+}
 
 export type Tusers = TmstpUsers & TmdtpUsers
 

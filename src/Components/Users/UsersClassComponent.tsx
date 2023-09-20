@@ -2,24 +2,33 @@ import React from 'react';
 import {Tusers} from "./UsersContainer";
 import axios from "axios";
 import {Users} from "./Users";
+import {Loading} from "../common/Loading/Loading";
 
 export class UsersClassComponent extends React.Component<Tusers> {
 
     componentDidMount() {
+        this.props.toggleIsLoading()
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}
         &count=${this.props.usersPage.pageSize}`)
             .then(res => {
                 this.props.setUsers(res.data.items)
                 this.props.setTotalCount(res.data.totalCount)
             })
+            .finally(() => {
+                this.props.toggleIsLoading()
+            })
     }
 
     changeCurrentPage(currentPage: number) {
+        this.props.toggleIsLoading()
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}
         &count=${this.props.usersPage.pageSize}`)
             .then(res => {
                 this.props.setUsers(res.data.items)
                 this.props.setCurrentPage(currentPage)
+            })
+            .finally(() => {
+                this.props.toggleIsLoading()
             })
     }
 
@@ -33,15 +42,21 @@ export class UsersClassComponent extends React.Component<Tusers> {
         const startLinkNumber = 1 + step * (Math.ceil(this.props.usersPage.currentPage / step) - 1)
 
         return (
-            <Users users={this.props.usersPage.users}
-                   changeCurrentPage={this.changeCurrentPage.bind(this)}
-                   step={step}
-                   countOfUserPages={countOfUserPages}
-                   startLinkNumber={startLinkNumber}
-                   endLinkNumber={startLinkNumber + step - 1}
-                   currentPage={this.props.usersPage.currentPage}
-                   toggleFollow={this.toggleFollow.bind(this)}
-            />
+            <>
+                {this.props.isLoading ?
+                    <Loading/>
+                    :
+                    <Users users={this.props.usersPage.users}
+                           changeCurrentPage={this.changeCurrentPage.bind(this)}
+                           step={step}
+                           countOfUserPages={countOfUserPages}
+                           startLinkNumber={startLinkNumber}
+                           endLinkNumber={startLinkNumber + step - 1}
+                           currentPage={this.props.usersPage.currentPage}
+                           toggleFollow={this.toggleFollow.bind(this)}
+                    />
+                }
+            </>
             // <div>
             //     <div>
             //         <button onClick={changePagesListDown}>list down</button>

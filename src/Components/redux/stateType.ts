@@ -14,6 +14,7 @@ export type UsersPageType = {
     pageSize: number
     currentPage: number
     error: null | string
+    isLoading: boolean
 }
 
 export type UserType = {

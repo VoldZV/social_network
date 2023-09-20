@@ -1,0 +1,12 @@
+.loadingWrapper {
+    width: 100px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.loadingWrapper > img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+}
