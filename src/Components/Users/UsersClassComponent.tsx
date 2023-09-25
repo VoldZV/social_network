@@ -9,7 +9,7 @@ export class UsersClassComponent extends React.Component<Tusers> {
     componentDidMount() {
         this.props.toggleIsLoading()
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}
-        &count=${this.props.usersPage.pageSize}`)
+        &count=${this.props.usersPage.pageSize}`, {withCredentials: true})
             .then(res => {
                 this.props.setUsers(res.data.items)
                 this.props.setTotalCount(res.data.totalCount)
@@ -22,7 +22,7 @@ export class UsersClassComponent extends React.Component<Tusers> {
     changeCurrentPage(currentPage: number) {
         this.props.toggleIsLoading()
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}
-        &count=${this.props.usersPage.pageSize}`)
+        &count=${this.props.usersPage.pageSize}`, {withCredentials: true})
             .then(res => {
                 this.props.setUsers(res.data.items)
                 this.props.setCurrentPage(currentPage)
