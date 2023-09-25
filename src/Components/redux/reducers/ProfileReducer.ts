@@ -1,9 +1,19 @@
-import {ProfilePageType} from "../stateType";
-import {store} from "../store";
+import {ProfilePageType, UserProfileType} from "../stateType";
 import {DispatchActionType} from "../redux-store";
 
-export const ProfileReducer = (state: ProfilePageType = store._state.profilePage, action: DispatchActionType): ProfilePageType => {
+const initialState: ProfilePageType = {
+    postsData: [],
+    user: null,
+    textariaPostValue: ''
+}
+
+export const ProfileReducer = (state = initialState, action: DispatchActionType): ProfilePageType => {
     switch (action.type) {
+        case "SetUser":
+            return {
+                ...state,
+                user: {...state.user, ...action.user}
+            }
         case "ChangeTextAriaPostValue":
             return {
                 ...state,
@@ -12,7 +22,11 @@ export const ProfileReducer = (state: ProfilePageType = store._state.profilePage
         case "ADD-POST":
             return {
                 ...state,
-                postsData: [...state.postsData, {id: Math.floor(Math.random()*100) + 100, message: state.textariaPostValue, likesCount: 0}],
+                postsData: [...state.postsData, {
+                    id: Math.floor(Math.random() * 100) + 100,
+                    message: state.textariaPostValue,
+                    likesCount: 0
+                }],
                 textariaPostValue: ""
             }
         default:
@@ -20,12 +34,8 @@ export const ProfileReducer = (state: ProfilePageType = store._state.profilePage
     }
 };
 
-
-
-
-
 // Reducer and ActionsType
-export type ProfileReducerActionsType = ChangeTextAriaPostValueAT | AddPostAT
+export type ProfileReducerActionsType = ChangeTextAriaPostValueAT | AddPostAT | ReturnType<typeof setUserProfile>
 type ChangeTextAriaPostValueAT = {
     type: "ChangeTextAriaPostValue"
     newValue: string
@@ -37,7 +47,14 @@ type AddPostAT = {
 // type AddPostAT = Action<'ADD-POST'>
 
 // Action creators
-export const addPostAC = ():AddPostAT  => ({type: "ADD-POST"})
-export const changeTextariaValueAC = (newValue: string):ChangeTextAriaPostValueAT  => ({type: "ChangeTextAriaPostValue", newValue})
+export const addPost = (): AddPostAT => ({type: "ADD-POST"})
+export const changeTextariaValue = (newValue: string): ChangeTextAriaPostValueAT => ({
+    type: "ChangeTextAriaPostValue",
+    newValue
+})
+export const setUserProfile = (user: UserProfileType) => {
+    return {
+        type: "SetUser", user
+    } as const }
 
 export default ProfileReducer;

@@ -12,6 +12,7 @@ export const store: StoreType = {
                 {id: 2, message: 'Second post message', likesCount: 1},
                 {id: 3, message: 'Third post message', likesCount: 3},
             ],
+            user: null,
             textariaPostValue: ""
         },
         dialogsPage: {

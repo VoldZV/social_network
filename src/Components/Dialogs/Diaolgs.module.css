@@ -13,8 +13,16 @@
     justify-content: space-evenly;
 }
 
-.dialogsItem a {
+.dialogsItem > a {
+    text-decoration: none;
+    color: white;
+    padding: 4px;
+    background: #8f8c8c;
     background: linear-gradient(0deg,#6c6b6b,black);
+    border-radius: 5px;
+    margin-top: 5px;
+    width: 80px;
+    text-align: center;
 }
 
 .dialogsItem a:hover {

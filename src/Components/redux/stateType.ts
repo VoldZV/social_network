@@ -49,6 +49,7 @@ export type MessageItemType = {
 
 export type ProfilePageType = {
     postsData: PostType[]
+    user: UserProfileType | null
     textariaPostValue: string
 }
 
@@ -57,7 +58,27 @@ export type PostType = {
     message: string
     likesCount: number
 }
-
+export type UserProfileType = {
+    aboutMe: string
+    contacts: {
+        facebook: null | string
+        website: null | string
+        vk: null | string
+        twitter: null | string
+        "instagram": null | string
+        "youtube": null | string
+        "github": null | string
+        "mainLink": null | string
+    },
+    "lookingForAJob": boolean,
+    "lookingForAJobDescription": string,
+    "fullName": string,
+    "userId": number,
+    "photos": {
+        "small": string,
+        "large": string
+    }
+}
 // Navbar Page Type
 
 export type NavbarPageType = {

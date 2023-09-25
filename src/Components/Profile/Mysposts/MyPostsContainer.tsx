@@ -1,5 +1,5 @@
 import React from "react";
-import {addPostAC, changeTextariaValueAC} from "../../redux/reducers/ProfileReducer";
+import {addPost, changeTextariaValue} from "../../redux/reducers/ProfileReducer";
 import {MyPosts} from "./MyPosts";
 import {PostType} from "../../redux/stateType";
 import {AppStateType, DispatchActionType} from "../../redux/redux-store";
@@ -23,10 +23,10 @@ type TmdtpMyPosts = {
 
 const mdtpMyPosts = (dispatch: Dispatch<DispatchActionType>): TmdtpMyPosts => ({
     addPost: () => {
-        dispatch(addPostAC())
+        dispatch(addPost())
     },
     changeTextAriaValue: (postValue: string) => {
-        dispatch(changeTextariaValueAC(postValue))
+        dispatch(changeTextariaValue(postValue))
     }
 })
 
