@@ -1,7 +1,14 @@
 import React from 'react';
 import {UsersPageType, UserType} from "../redux/stateType";
 import {AppStateType} from "../redux/redux-store";
-import {setCurrentPage, setTotalCount, setUsers, toggleFollow, toggleIsLoading} from "../redux/reducers/UsersReducer";
+import {
+    addFollowingInProgressUser, removeFollowingInProgressUser,
+    setCurrentPage,
+    setTotalCount,
+    setUsers,
+    toggleFollow,
+    toggleIsLoading
+} from "../redux/reducers/UsersReducer";
 import {connect} from "react-redux";
 import {UsersClassComponent} from "./UsersClassComponent";
 
@@ -21,6 +28,8 @@ type TmdtpUsers =  {
     setTotalCount: (totalCount: number) => void
     setCurrentPage: (totalCount: number) => void
     toggleIsLoading: () => void
+    addFollowingInProgressUser: (userId: number) => void
+    removeFollowingInProgressUser: (userId: number) => void
 }
 
 // const mdtpUsers = (dispatch: Dispatch<DispatchActionType>): TmdtpUsers => ({
@@ -46,6 +55,8 @@ const mdtpUsers: TmdtpUsers = {
     setTotalCount,
     setCurrentPage,
     toggleIsLoading,
+    addFollowingInProgressUser,
+    removeFollowingInProgressUser
 }
 
 export type Tusers = TmstpUsers & TmdtpUsers

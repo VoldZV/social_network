@@ -1,18 +1,17 @@
 import React from 'react';
 import {Tusers} from "./UsersContainer";
-import axios from "axios";
 import {Users} from "./Users";
 import {Loading} from "../common/Loading/Loading";
+import {usersApi} from "../../API/api";
 
 export class UsersClassComponent extends React.Component<Tusers> {
 
     componentDidMount() {
         this.props.toggleIsLoading()
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}
-        &count=${this.props.usersPage.pageSize}`, {withCredentials: true})
+        usersApi.getUsers(this.props.usersPage.currentPage)
             .then(res => {
-                this.props.setUsers(res.data.items)
-                this.props.setTotalCount(res.data.totalCount)
+                this.props.setUsers(res.items)
+                this.props.setTotalCount(res.totalCount)
             })
             .finally(() => {
                 this.props.toggleIsLoading()
@@ -21,10 +20,9 @@ export class UsersClassComponent extends React.Component<Tusers> {
 
     changeCurrentPage(currentPage: number) {
         this.props.toggleIsLoading()
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}
-        &count=${this.props.usersPage.pageSize}`, {withCredentials: true})
+        usersApi.getUsers(currentPage)
             .then(res => {
-                this.props.setUsers(res.data.items)
+                this.props.setUsers(res.items)
                 this.props.setCurrentPage(currentPage)
             })
             .finally(() => {
@@ -54,6 +52,9 @@ export class UsersClassComponent extends React.Component<Tusers> {
                            endLinkNumber={startLinkNumber + step - 1}
                            currentPage={this.props.usersPage.currentPage}
                            toggleFollow={this.toggleFollow.bind(this)}
+                           followingInProgressUsers={this.props.usersPage.followingInProgressUsers}
+                           addFollowingInProgressUser={this.props.addFollowingInProgressUser}
+                           removeFollowingInProgressUser={this.props.removeFollowingInProgressUser}
                     />
                 }
             </>

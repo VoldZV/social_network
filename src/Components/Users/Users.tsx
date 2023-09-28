@@ -1,7 +1,7 @@
 import React from 'react';
 import {UserType} from "../redux/stateType";
 import {NavLink} from "react-router-dom";
-import axios from "axios";
+import {usersApi} from "../../API/api";
 
 type UsersPropsType = {
     users: UserType[]
@@ -12,6 +12,9 @@ type UsersPropsType = {
     endLinkNumber: number
     changeCurrentPage: (currentPage: number) => void
     toggleFollow: (userId: number) => void
+    followingInProgressUsers: number[]
+    addFollowingInProgressUser: (userId: number) => void
+    removeFollowingInProgressUser: (userId: number) => void
 }
 
 export const Users: React.FC<UsersPropsType> = ({
@@ -22,7 +25,10 @@ export const Users: React.FC<UsersPropsType> = ({
                                                     countOfUserPages,
                                                     changeCurrentPage,
                                                     toggleFollow,
-                                                    currentPage
+                                                    currentPage,
+                                                    followingInProgressUsers,
+                                                    addFollowingInProgressUser,
+                                                    removeFollowingInProgressUser
                                                 }) => {
 
     const linkToRender = new Array(step).fill(1).map((_, i) => (
@@ -58,22 +64,28 @@ export const Users: React.FC<UsersPropsType> = ({
             </div>
             {users.map(user => {
                     const fetchToChangeFollowed = () => {
-                        if(!user.followed) {
-                            axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {}, {withCredentials: true, headers: {"API-KEY": '9a4825e2-08d3-45d5-9581-2297f88ccdf2'}})
+                        addFollowingInProgressUser(user.id)
+                        if (!user.followed) {
+                            usersApi.followUser(user.id)
                                 .then((res) => {
-                                    if(res.data.resultCode === 0) toggleFollow(user.id)
+                                    if (res.resultCode === 0) toggleFollow(user.id)
                                 })
                                 .catch((err) => console.log(err))
+                                .finally(() => {
+                                    removeFollowingInProgressUser(user.id)
+                                })
                         } else {
-                            axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`, {withCredentials: true,headers: {"API-KEY": '9a4825e2-08d3-45d5-9581-2297f88ccdf2'}})
+                            usersApi.unFollowUser(user.id)
                                 .then((res) => {
-                                    if(res.data.resultCode === 0) toggleFollow(user.id)
+                                    if (res.resultCode === 0) toggleFollow(user.id)
                                 })
                                 .catch((err) => console.log(err))
+                                .finally(() => {
+                                    removeFollowingInProgressUser(user.id)
+                                })
                         }
                     }
-
-
+                    const buttonDisabled = followingInProgressUsers.some(id => id === user.id)
 
                     return <div key={user.id}>
                         <NavLink to={`/profile/${user.id}`}>
@@ -82,7 +94,10 @@ export const Users: React.FC<UsersPropsType> = ({
                                  alt="PHOTO"/>
                         </NavLink>
                         {user.name} c ID {user.id}
-                        <button onClick={fetchToChangeFollowed}>{user.followed ? "unfollow" : "follow"}</button>
+                        <button onClick={fetchToChangeFollowed}
+                        disabled={buttonDisabled}
+                        >{user.followed ? "unfollow" : "follow"}
+                        </button>
                     </div>
                 }
             )

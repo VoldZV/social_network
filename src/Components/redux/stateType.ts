@@ -15,6 +15,7 @@ export type UsersPageType = {
     currentPage: number
     error: null | string
     isLoading: boolean
+    followingInProgressUsers: number[]
 }
 
 export type UserType = {

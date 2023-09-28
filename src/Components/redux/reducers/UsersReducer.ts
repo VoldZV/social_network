@@ -7,11 +7,22 @@ const initialState: UsersPageType = {
     currentPage: 1,
     pageSize: 5,
     totalCount: 0,
-    isLoading: false
+    isLoading: false,
+    followingInProgressUsers: []
 }
 
 export const UsersReducer = (state: UsersPageType = initialState, action: DispatchActionType): UsersPageType => {
     switch (action.type) {
+        case "removeFollowingInProgressUser":
+            return {
+                ...state,
+                followingInProgressUsers: state.followingInProgressUsers.filter(id => id !== action.userId)
+            }
+        case "addFollowingInProgressUser":
+            return {
+                ...state,
+                followingInProgressUsers: [...state.followingInProgressUsers, action.userId]
+            }
         case "SET-CURRENT-PAGE":
             return {
                 ...state,
@@ -47,7 +58,9 @@ export type UsersReducerActionsType = SetUsersActionType |
     toggleFollowActionType |
     ReturnType<typeof setTotalCount> |
     ReturnType<typeof setCurrentPage> |
-    ReturnType<typeof toggleIsLoading>
+    ReturnType<typeof toggleIsLoading> |
+    ReturnType<typeof addFollowingInProgressUser> |
+    ReturnType<typeof removeFollowingInProgressUser>
 
 type SetUsersActionType = {
     type: "GET-USERS",
@@ -77,4 +90,12 @@ export const setCurrentPage = (currentPage: number) => ({
 } as const)
 export const toggleIsLoading = () => ({
     type: "TOGGLE-ISLOADING",
+} as const)
+export const addFollowingInProgressUser = (userId: number) => ({
+    type: "addFollowingInProgressUser",
+    userId
+} as const)
+export const removeFollowingInProgressUser = (userId: number) => ({
+    type: "removeFollowingInProgressUser",
+    userId
 } as const)
