@@ -1,4 +1,6 @@
-import {DispatchActionType} from "../redux-store";
+import {AppActionTypes} from "../redux-store";
+import {Dispatch} from "redux";
+import {authApi} from "../../../API/api";
 
 
 export type AuthStateType = {
@@ -15,7 +17,7 @@ const initialAuthState: AuthStateType = {
     isAuth: false
 }
 
-export const authReducer = (state = initialAuthState, action: DispatchActionType): AuthStateType => {
+export const authReducer = (state = initialAuthState, action: AppActionTypes): AuthStateType => {
     switch (action.type) {
         case "SET-USER-DATA":
             return {
@@ -36,3 +38,16 @@ export const setUserData = (userData: {id: null | number
     type: 'SET-USER-DATA',
     userData
 } as const)
+
+//thunk
+
+export const authUserTC = () => async (dispatch: Dispatch<AppActionTypes>) => {
+    try {
+        const res = await authApi.authUser()
+        dispatch(setUserData(res.data))
+    } catch (e: any) {
+        dispatch(setUserData({id: null, email: null, login: null}))
+        console.log(e.message)
+    } finally {
+    }
+}

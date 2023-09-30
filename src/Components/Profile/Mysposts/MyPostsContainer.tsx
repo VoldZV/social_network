@@ -2,7 +2,7 @@ import React from "react";
 import {addPost, changeTextariaValue} from "../../redux/reducers/ProfileReducer";
 import {MyPosts} from "./MyPosts";
 import {PostType} from "../../redux/stateType";
-import {AppStateType, DispatchActionType} from "../../redux/redux-store";
+import {AppStateType, AppActionTypes} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 
@@ -21,7 +21,7 @@ type TmdtpMyPosts = {
     changeTextAriaValue: (postValue: string) => void
 }
 
-const mdtpMyPosts = (dispatch: Dispatch<DispatchActionType>): TmdtpMyPosts => ({
+const mdtpMyPosts = (dispatch: Dispatch<AppActionTypes>): TmdtpMyPosts => ({
     addPost: () => {
         dispatch(addPost())
     },

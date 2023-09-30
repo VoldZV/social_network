@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppStateType, DispatchActionType} from "../redux/redux-store";
+import {AppStateType, AppActionTypes} from "../redux/redux-store";
 import {Dispatch} from "redux";
 import {connect} from "react-redux";
 import {Navbar} from "./Navbar";
@@ -17,7 +17,7 @@ type TmdtpNavbar = {
 
 }
 
-const mdtpNavBar = (dispatch: Dispatch<DispatchActionType>) : TmdtpNavbar => ({
+const mdtpNavBar = (dispatch: Dispatch<AppActionTypes>) : TmdtpNavbar => ({
 
 })
 

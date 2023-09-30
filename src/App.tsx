@@ -16,6 +16,7 @@ function App() {
                 <NavbarContainer/>
                 <div className={'content'}>
                     <Routes>
+                        {/*<Route path={'/'} element={<Navigate to={'/profile'}/>}/>*/}
                         <Route path={'/profile/:userId?'} element={<ProfileContainer/>}/>
                         <Route path={'/messages/*'} element={<DialogsContainer/>}/>
                         <Route path={'/users'} element={<UsersContainer/>}/>

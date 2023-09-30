@@ -1,22 +1,23 @@
-import {ProfilePageType, UserProfileType} from "../redux/stateType";
+import {ProfilePageType} from "../redux/stateType";
 import {AppStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
 import {ProfileClassComponent} from "./ProfileClassComponent";
-import {addPost, changeTextariaValue, setUserProfile} from "../redux/reducers/ProfileReducer";
+import {addPost, changeTextariaValue, getUserProfileTC} from "../redux/reducers/ProfileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 
-type TmstpProfile = ProfilePageType
+type TmstpProfile = ProfilePageType & {authUserId: number | null}
 
 const mstpProfile = (state: AppStateType): TmstpProfile => ({
     postsData: state.profilePage.postsData,
     user: state.profilePage.user,
+    authUserId: state.auth.id,
     textariaPostValue: state.profilePage.textariaPostValue
 })
 
 type TmdtpProfile =  {
     addPost: () => void,
-    setUserProfile: (user: UserProfileType) => void,
+    getUserProfileTC: (userId: number) => void,
     changeTextariaValue: (textValue: string) => void
     // setUsers: (users: UserType[]) => void
     // toggleFollow: (userId: number) => void
@@ -27,7 +28,7 @@ type TmdtpProfile =  {
 
 const mdtpProfile: TmdtpProfile = {
     addPost,
-    setUserProfile,
+    getUserProfileTC,
     changeTextariaValue
 }
 

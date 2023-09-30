@@ -2,7 +2,7 @@ import {StateType} from "./stateType";
 import {ProfileReducer} from "./reducers/ProfileReducer";
 import DialogsReducer from "./reducers/DialogsReducer";
 import NavBarReducer from "./reducers/NavBarReducer";
-import {DispatchActionType} from "./redux-store";
+import {AppActionTypes} from "./redux-store";
 
 export const store: StoreType = {
     _state: {
@@ -110,7 +110,7 @@ type StoreType = {
     subscriber: (observer: () => void) => void
     getState: StateType
     setState: StateType
-    dispatch: (action: DispatchActionType) => void
+    dispatch: (action: AppActionTypes) => void
     // addPost: (postValue: string) => void
     // changeTextariaValue: (postValue: string) => void
     // addMessage: (newMessage: string) => void

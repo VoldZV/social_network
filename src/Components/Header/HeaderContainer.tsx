@@ -1,5 +1,5 @@
 import {connect} from "react-redux";
-import {setUserData} from "../redux/reducers/authReducer";
+import {authUserTC} from "../redux/reducers/authReducer";
 import {HeaderClassComponent} from "./HeaderClassComponent";
 import {AppStateType} from "../redux/redux-store";
 
@@ -14,16 +14,19 @@ const mstpHeader = (state: AppStateType): TmstpHeader => ({
 })
 
 type TmdtpHeader = {
-    setUserData: (userData: {
-        id: null | number
-        email: null | string
-        login: null | string
-    }) => void
+    // setUserData: (userData: {
+    //     id: null | number
+    //     email: null | string
+    //     login: null | string
+    // }) => void
+    authUserTC: () => void
 }
 
 const mdtpHeader: TmdtpHeader = {
-    setUserData
+    // setUserData
+    authUserTC
 }
+
 
 export type Theader = TmstpHeader & TmdtpHeader
 

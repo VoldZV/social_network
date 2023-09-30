@@ -1,8 +1,8 @@
 import {NavbarPageType} from "../stateType";
 import {store} from "../store";
-import {DispatchActionType} from "../redux-store";
+import {AppActionTypes} from "../redux-store";
 
-export const NavBarReducer = (state: NavbarPageType = store._state.navbarPage, action: DispatchActionType): NavbarPageType => {
+export const NavBarReducer = (state: NavbarPageType = store._state.navbarPage, action: AppActionTypes): NavbarPageType => {
     switch (action.type) {
         case "CHANGE-ANYTHING":
             return {...state}

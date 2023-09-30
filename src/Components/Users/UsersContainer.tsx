@@ -1,35 +1,31 @@
 import React from 'react';
-import {UsersPageType, UserType} from "../redux/stateType";
+import {UserType} from "../redux/stateType";
 import {AppStateType} from "../redux/redux-store";
-import {
-    addFollowingInProgressUser, removeFollowingInProgressUser,
-    setCurrentPage,
-    setTotalCount,
-    setUsers,
-    toggleFollow,
-    toggleIsLoading
-} from "../redux/reducers/UsersReducer";
+import {getUsersTC, toggleFollowTC} from "../redux/reducers/UsersReducer";
 import {connect} from "react-redux";
 import {UsersClassComponent} from "./UsersClassComponent";
 
 type TmstpUsers = {
-    usersPage: UsersPageType
+    users: UserType[]
+    currentPage: number
+    followingInProgressUsers: number[]
+    totalCount: number
+    pageSize: number
     isLoading: boolean
 }
 
 const mstpUsers = (state: AppStateType): TmstpUsers => ({
-    usersPage: state.usersPage, //отрефакторить добавить отдельно users[] , totacount, pagesize
+    users: state.usersPage.users,
+    currentPage: state.usersPage.currentPage,
+    followingInProgressUsers: state.usersPage.followingInProgressUsers,
+    totalCount: state.usersPage.totalCount,
+    pageSize: state.usersPage.pageSize,
     isLoading: state.usersPage.isLoading
 })
 
 type TmdtpUsers =  {
-    setUsers: (users: UserType[]) => void
-    toggleFollow: (userId: number) => void
-    setTotalCount: (totalCount: number) => void
-    setCurrentPage: (totalCount: number) => void
-    toggleIsLoading: () => void
-    addFollowingInProgressUser: (userId: number) => void
-    removeFollowingInProgressUser: (userId: number) => void
+    getUsersTC: (currentPage: number) => void
+    toggleFollowTC: (userId: number, followed: boolean) => void
 }
 
 // const mdtpUsers = (dispatch: Dispatch<DispatchActionType>): TmdtpUsers => ({
@@ -50,13 +46,8 @@ type TmdtpUsers =  {
 //     },
 // })
 const mdtpUsers: TmdtpUsers = {
-    setUsers,
-    toggleFollow,
-    setTotalCount,
-    setCurrentPage,
-    toggleIsLoading,
-    addFollowingInProgressUser,
-    removeFollowingInProgressUser
+    getUsersTC,
+    toggleFollowTC,
 }
 
 export type Tusers = TmstpUsers & TmdtpUsers

@@ -2,59 +2,40 @@ import React from 'react';
 import {Tusers} from "./UsersContainer";
 import {Users} from "./Users";
 import {Loading} from "../common/Loading/Loading";
-import {usersApi} from "../../API/api";
 
 export class UsersClassComponent extends React.Component<Tusers> {
 
     componentDidMount() {
-        this.props.toggleIsLoading()
-        usersApi.getUsers(this.props.usersPage.currentPage)
-            .then(res => {
-                this.props.setUsers(res.items)
-                this.props.setTotalCount(res.totalCount)
-            })
-            .finally(() => {
-                this.props.toggleIsLoading()
-            })
+        this.props.getUsersTC(this.props.currentPage)
     }
 
-    changeCurrentPage(currentPage: number) {
-        this.props.toggleIsLoading()
-        usersApi.getUsers(currentPage)
-            .then(res => {
-                this.props.setUsers(res.items)
-                this.props.setCurrentPage(currentPage)
-            })
-            .finally(() => {
-                this.props.toggleIsLoading()
-            })
-    }
+    // changeCurrentPage(currentPage: number) {
+    //     this.props.getUsersTC(currentPage)
+    // }
 
-    toggleFollow(userId: number) {
-        this.props.toggleFollow(userId)
-    }
+    // toggleFollow(userId: number) {
+    //     this.props.toggleFollow(userId)
+    // }
 
     render() {
-        const countOfUserPages = Math.ceil(this.props.usersPage.totalCount / this.props.usersPage.pageSize)
+        const countOfUserPages = Math.ceil(this.props.totalCount / this.props.pageSize)
         const step = 10
-        const startLinkNumber = 1 + step * (Math.ceil(this.props.usersPage.currentPage / step) - 1)
+        const startLinkNumber = 1 + step * (Math.ceil(this.props.currentPage / step) - 1)
 
         return (
             <>
                 {this.props.isLoading ?
                     <Loading/>
                     :
-                    <Users users={this.props.usersPage.users}
-                           changeCurrentPage={this.changeCurrentPage.bind(this)}
+                    <Users users={this.props.users}
                            step={step}
                            countOfUserPages={countOfUserPages}
                            startLinkNumber={startLinkNumber}
                            endLinkNumber={startLinkNumber + step - 1}
-                           currentPage={this.props.usersPage.currentPage}
-                           toggleFollow={this.toggleFollow.bind(this)}
-                           followingInProgressUsers={this.props.usersPage.followingInProgressUsers}
-                           addFollowingInProgressUser={this.props.addFollowingInProgressUser}
-                           removeFollowingInProgressUser={this.props.removeFollowingInProgressUser}
+                           currentPage={this.props.currentPage}
+                           followingInProgressUsers={this.props.followingInProgressUsers}
+                           changeCurrentPage={this.props.getUsersTC}
+                           toggleFollow={this.props.toggleFollowTC}
                     />
                 }
             </>

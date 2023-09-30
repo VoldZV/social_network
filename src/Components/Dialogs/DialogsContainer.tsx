@@ -3,7 +3,7 @@ import {addMessageAC, changeMessageAddFormValueAC} from "../redux/reducers/Dialo
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {DialogsPageType} from "../redux/stateType";
-import {AppStateType, DispatchActionType} from "../redux/redux-store";
+import {AppStateType, AppActionTypes} from "../redux/redux-store";
 import {Dispatch} from "redux";
 
 type TmstpDialogs = {
@@ -19,7 +19,7 @@ type TmdtpDialogs = {
     changeAddFormValue: (newMessage: string) => void
 }
 
-const mdtpDialogs = (dispatch: Dispatch<DispatchActionType>) : TmdtpDialogs => ({
+const mdtpDialogs = (dispatch: Dispatch<AppActionTypes>) : TmdtpDialogs => ({
     addMessage: () => {
         dispatch(addMessageAC())
     },

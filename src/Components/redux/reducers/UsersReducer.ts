@@ -1,5 +1,7 @@
 import {UsersPageType, UserType} from "../stateType";
-import {DispatchActionType} from "../redux-store";
+import {AppActionTypes} from "../redux-store";
+import {usersApi} from "../../../API/api";
+import {Dispatch} from "redux";
 
 const initialState: UsersPageType = {
     users: [],
@@ -11,7 +13,7 @@ const initialState: UsersPageType = {
     followingInProgressUsers: []
 }
 
-export const UsersReducer = (state: UsersPageType = initialState, action: DispatchActionType): UsersPageType => {
+export const UsersReducer = (state: UsersPageType = initialState, action: AppActionTypes): UsersPageType => {
     switch (action.type) {
         case "removeFollowingInProgressUser":
             return {
@@ -99,3 +101,32 @@ export const removeFollowingInProgressUser = (userId: number) => ({
     type: "removeFollowingInProgressUser",
     userId
 } as const)
+
+// thunk
+
+export const getUsersTC = (currentPage: number) => async (dispatch: Dispatch<AppActionTypes>) => {
+    dispatch(toggleIsLoading())
+    try {
+        const res = await usersApi.getUsers(currentPage)
+        dispatch(setTotalCount(res.totalCount))
+        dispatch(setCurrentPage(currentPage))
+        dispatch(setUsers(res.items))
+    } catch (e: any) {
+        console.log(e.message)
+    } finally {
+        dispatch(toggleIsLoading())
+    }
+}
+
+export const toggleFollowTC = (userId: number, followed: boolean) => async (dispatch: Dispatch<AppActionTypes>) => {
+    dispatch(addFollowingInProgressUser(userId))
+    try {
+        const res =  !followed ? await usersApi.followUser(userId) : await usersApi.unFollowUser(userId)
+        if (res.resultCode === 0) dispatch(toggleFollow(userId))
+    } catch (e: any) {
+        console.log(e.message)
+    } finally {
+        dispatch(removeFollowingInProgressUser(userId))
+    }
+}
+
