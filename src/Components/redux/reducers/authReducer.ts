@@ -44,9 +44,8 @@ export const setUserData = (userData: {id: null | number
 export const authUserTC = () => async (dispatch: Dispatch<AppActionTypes>) => {
     try {
         const res = await authApi.authUser()
-        dispatch(setUserData(res.data))
+        if(res.resultCode === 0) dispatch(setUserData(res.data))
     } catch (e: any) {
-        dispatch(setUserData({id: null, email: null, login: null}))
         console.log(e.message)
     } finally {
     }

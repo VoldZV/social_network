@@ -1,9 +1,12 @@
+import React from "react";
 import {ProfilePageType} from "../redux/stateType";
 import {AppStateType} from "../redux/redux-store";
 import {connect} from "react-redux";
 import {ProfileClassComponent} from "./ProfileClassComponent";
 import {addPost, changeTextariaValue, getUserProfileTC} from "../redux/reducers/ProfileReducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
+import {WithAuthRedirect} from "../HOC/WithAuthRedirect";
+import {compose} from "redux";
 
 
 type TmstpProfile = ProfilePageType & {authUserId: number | null}
@@ -61,4 +64,4 @@ export const withRouter = <Props extends WithRouterProps>(
 
 export type Tprofile = TmstpProfile & TmdtpProfile & WithRouterProps
 
-export const ProfileContainer = connect(mstpProfile, mdtpProfile)(withRouter(ProfileClassComponent))
+export const ProfileContainer = compose<React.ComponentType>(connect(mstpProfile, mdtpProfile), withRouter,WithAuthRedirect<Tprofile>)(ProfileClassComponent)

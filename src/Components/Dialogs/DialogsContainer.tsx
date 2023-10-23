@@ -3,8 +3,9 @@ import {addMessageAC, changeMessageAddFormValueAC} from "../redux/reducers/Dialo
 import {Dialogs} from "./Dialogs";
 import {connect} from "react-redux";
 import {DialogsPageType} from "../redux/stateType";
-import {AppStateType, AppActionTypes} from "../redux/redux-store";
-import {Dispatch} from "redux";
+import {AppActionTypes, AppStateType} from "../redux/redux-store";
+import {compose, Dispatch} from "redux";
+import {WithAuthRedirect} from "../HOC/WithAuthRedirect";
 
 type TmstpDialogs = {
     dialogsPage: DialogsPageType
@@ -30,7 +31,7 @@ const mdtpDialogs = (dispatch: Dispatch<AppActionTypes>) : TmdtpDialogs => ({
 
 export type Tdialogs = TmstpDialogs & TmdtpDialogs
 
-export const DialogsContainer = connect(mstpDialogs, mdtpDialogs)(Dialogs)
+export const DialogsContainer = compose<React.ComponentType>(connect(mstpDialogs, mdtpDialogs), WithAuthRedirect<Tdialogs>)(Dialogs)
 
 
 
